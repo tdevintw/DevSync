@@ -153,20 +153,20 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form>
+<form action="register" method="post">
     <h3>Register Here</h3>
 
     <label for="email">Email</label>
-    <input type="text" placeholder="Email" id="email">
+    <input type="text" placeholder="Email" id="email" required>
 
     <div class="checkbox-group">
         <label style="margin-top: 0" for="manager">Manager</label>
-        <input style="cursor: pointer;width: 20px" type="radio" id="manager" name="role" value="manager">
+        <input style="cursor: pointer;width: 20px" type="radio" id="manager" name="role" value="MANAGER" required>
         <label style="margin-top: 0" for="client">Client</label>
-        <input style="cursor: pointer;width: 20px" type="radio" id="client" name="role" value="client">
+        <input style="cursor: pointer;width: 20px" type="radio" id="client" name="role" value="CLIENT" required>
     </div>
 
-    <button>Register</button>
+    <button type="submit">Register</button>
     <div class="social">
         <div class="go"><i class="fab fa-google"></i>  Google</div>
         <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
