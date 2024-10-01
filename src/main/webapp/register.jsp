@@ -157,7 +157,7 @@
     <h3>Register Here</h3>
 
     <label for="email">Email</label>
-    <input type="text" placeholder="Email" id="email" required>
+    <input name="email" type="text" placeholder="Email" id="email" required>
 
     <div class="checkbox-group">
         <label style="margin-top: 0" for="manager">Manager</label>

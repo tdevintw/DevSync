@@ -140,11 +140,11 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form>
+<form action="login" method="post">
     <h3>Login Here</h3>
 
     <label for="email">Email</label>
-    <input type="text" placeholder="Email" id="email">
+    <input name="email" type="text" placeholder="Email" id="email">
 
     <button>Log In</button>
     <div class="social">

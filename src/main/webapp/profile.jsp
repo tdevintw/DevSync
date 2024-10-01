@@ -99,8 +99,8 @@
 <div class="container">
     <div class="profile-header">
         <div class="profile-info">
-            <h1>John Doe</h1>
-            <p>john.doe@example.com</p>
+            <h1>${user.name}</h1>
+            <p>${user.email}</p>
         </div>
     </div>
     <div class="profile-details">
@@ -108,19 +108,19 @@
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" value="John Doe">
+                <input type="text" id="name" name="name" value="${user.name}">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="john.doe@example.com">
+                <input type="email" id="email" name="email" value="${user.email}">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" value="${user.password}">
             </div>
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password">
+                <input type="password" id="confirm-password" name="confirm-password" value="${user.password}">
             </div>
             <button type="submit">Update Profile</button>
         </form>
