@@ -35,7 +35,7 @@ public class ProfileServlet extends HttpServlet {
         String password= request.getParameter("password");
         String confirmPassword = request.getParameter("confirm_password");
         String method = request.getParameter("_method");
-        if(method.equals("DELETE")){
+        if(method != null && method.equals("DELETE")){
             User user = (User) request.getSession(false).getAttribute("user");
             if(userService.delete(user)){
                 request.getSession(false).invalidate();

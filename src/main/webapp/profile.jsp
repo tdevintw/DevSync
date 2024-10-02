@@ -105,19 +105,20 @@
             font-family: "Codec cold",sans-serif;
             font-size: 16px;
             font-weight: 700;
-            height: 54px;
+            height: 50px;
             justify-content: center;
             letter-spacing: .4px;
             line-height: 1;
             max-width: 100%;
             padding-left: 20px;
             padding-right: 20px;
-            padding-top: 3px;
+            padding-top: 6px;
             text-decoration: none;
             text-transform: uppercase;
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+            margin-top: 20px;
         }
 
         .button-75:active {
@@ -139,12 +140,12 @@
 
         @media screen and (max-width: 991px) {
             .button-75 {
-                font-size: 15px;
-                height: 50px;
+                font-size: 7px;
+                height: 35px;
             }
 
             .button-75 span {
-                line-height: 50px;
+                line-height: 25px;
             }
         }
 
