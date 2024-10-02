@@ -10,13 +10,27 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
 
     private UserService userService = new UserServiceImp();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                if (user.equals("MANAGER")) {
+                    response.sendRedirect("dashboard");
+                } else {
+                    response.sendRedirect("profile");
+                }
+                return;
+            }
+        }
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
@@ -27,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
         String name = "name";
         String lastName = "lastName";
         String password = "password";
-        String role = request.getParameter("role").toUpperCase(); // Adjust based on how you handle roles
+        String role = request.getParameter("role").toUpperCase();
 
         User user = new User();
         user.setUsername(username);
@@ -36,9 +50,9 @@ public class RegisterServlet extends HttpServlet {
         user.setLastName(lastName);
         user.setPassword(password);
         user.setRole(role);
-        if(userService.add(user)!=null){
-        response.sendRedirect("login");
-        }else{
+        if (userService.add(user) != null) {
+            response.sendRedirect("login");
+        } else {
             response.sendRedirect("/");
         }
     }

@@ -92,6 +92,61 @@
         button:hover {
             background-color: #0056b3;
         }
+        .button-75 {
+            align-items: center;
+            background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+            border: 0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            font-family: "Codec cold",sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            height: 54px;
+            justify-content: center;
+            letter-spacing: .4px;
+            line-height: 1;
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            text-decoration: none;
+            text-transform: uppercase;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-75:active {
+            outline: 0;
+        }
+
+        .button-75:hover {
+            outline: 0;
+        }
+
+        .button-75 span {
+            transition: all 200ms;
+        }
+
+        .button-75:hover span {
+            transform: scale(.9);
+            opacity: .75;
+        }
+
+        @media screen and (max-width: 991px) {
+            .button-75 {
+                font-size: 15px;
+                height: 50px;
+            }
+
+            .button-75 span {
+                line-height: 50px;
+            }
+        }
 
     </style>
 </head>
@@ -99,20 +154,20 @@
 <div class="container">
     <div class="profile-header">
         <div class="profile-info">
-            <h1>${user.name}</h1>
+            <h1>${user.username}</h1>
             <p>${user.email}</p>
         </div>
     </div>
     <div class="profile-details">
         <h2>Profile Details</h2>
-        <form>
+        <form action="profile" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" value="${user.name}">
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="${user.email}">
+                <label for="name">Name</label>
+                <input type="text" id="last_name" name="last_name" value="${user.lastName}">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -120,9 +175,13 @@
             </div>
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" value="${user.password}">
+                <input type="password" id="confirm-password" name="confirm_password" value="${user.password}">
             </div>
             <button type="submit">Update Profile</button>
+        </form>
+        <form action="profile" method="post" onsubmit="return confirm('Are you sure you want to delete your profile?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <button  type="submit" class="button-75" >Delete Profile</button>
         </form>
     </div>
 </div>

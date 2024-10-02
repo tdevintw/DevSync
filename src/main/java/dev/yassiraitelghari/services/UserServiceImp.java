@@ -16,4 +16,14 @@ public class UserServiceImp implements UserService{
         return userRepository.get(email);
     }
 
+    @Override
+    public User update(User user){
+        return userRepository.update(user);
+    }
+
+    @Override
+    public boolean delete(User user){
+        return userRepository.delete(user);
+    }
+
 }

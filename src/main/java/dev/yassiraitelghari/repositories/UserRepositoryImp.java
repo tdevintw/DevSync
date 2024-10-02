@@ -45,4 +45,60 @@ public class UserRepositoryImp implements UserRepository {
         }
         return user;
     }
+
+    @Override
+    public User update(User user) {
+        Configuration cfg = new Configuration().configure();
+        SessionFactory sf = cfg.addAnnotatedClass(User.class).buildSessionFactory();
+        Session session = sf.getCurrentSession();
+        try {
+            session.beginTransaction();
+            User getUser = session.get(User.class, user.getId());
+            if (getUser != null) {
+                getUser.setName(user.getName());
+                getUser.setLastName(user.getLastName());
+                getUser.setPassword(user.getPassword());
+            }
+            session.getTransaction().commit();
+            return getUser;
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            sf.close();
+        }
+    }
+
+    @Override
+    public boolean delete(User user) {
+        Configuration cfg = new Configuration().configure();
+        SessionFactory sf = cfg.addAnnotatedClass(User.class).buildSessionFactory();
+        Session session = sf.getCurrentSession();
+        try {
+            session.beginTransaction();
+            User getUser = session.get(User.class, user.getId());
+            if (getUser != null) {
+                session.delete(getUser);
+                session.getTransaction().commit();
+                return true;
+            } else {
+                session.getTransaction().rollback();
+                return false;
+            }
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+            sf.close();
+        }
+    }
 }
+
