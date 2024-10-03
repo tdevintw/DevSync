@@ -36,7 +36,7 @@
                                     <a href="#" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
                                        x-state-description="undefined: &quot;bg-black bg-opacity-25&quot;, undefined: &quot;hover:bg-sky-800&quot;">Dashboard</a>
 
-                                    <a href="#" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
+                                    <a href="" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
                                        x-state-description="undefined: &quot;bg-black bg-opacity-25&quot;, undefined: &quot;hover:bg-sky-800&quot;">Logout</a>
 
                                 </div>

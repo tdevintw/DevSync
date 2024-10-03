@@ -1,6 +1,9 @@
     package dev.yassiraitelghari.domain;
 
+    import dev.yassiraitelghari.domain.Task;
     import jakarta.persistence.*;
+
+    import java.util.List;
 
     @Entity
     @Table(name = "users")
@@ -27,7 +30,10 @@
         @Column(name = "role")
         private String role;
 
-        public User(int id, String username,String email ,String name, String password, String role , String lastName) {
+        @OneToMany
+        private List<Task> tasks;
+
+        public User(int id, String username,String email ,String name, String password, String role , String lastName , List<Task> tasks) {
             this.id = id;
             this.username = username;
             this.email = email;
@@ -35,15 +41,18 @@
             this.password = password;
             this.role = role;
             this.lastName = lastName;
+            this.tasks = tasks;
+
         }
 
-        public User(String username,String email,String name, String password, String role, String lastName) {
+        public User(String username,String email,String name, String password, String role, String lastName ,  List<Task> tasks) {
             this.username = username;
             this.email = email;
             this.name = name;
             this.password = password;
             this.role = role;
             this.lastName = lastName;
+            this.tasks = tasks;
         }
 
         public User() {
@@ -104,5 +113,13 @@
 
         public void setLastName(String lastName) {
             this.lastName = lastName;
+        }
+
+        public List<Task> getTasks() {
+            return tasks;
+        }
+
+        public void setTasks(List<Task> tasks) {
+            this.tasks = tasks;
         }
     }
