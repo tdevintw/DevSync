@@ -40,7 +40,6 @@ public class ProfileServlet extends HttpServlet {
             User user = (User) request.getSession(false).getAttribute("user");
             if(userService.delete(user)){
                 request.getSession(false).invalidate();
-
             }
             response.sendRedirect("login");
             return;
