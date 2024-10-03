@@ -4,6 +4,8 @@ import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.repositories.UserRepository;
 import dev.yassiraitelghari.repositories.UserRepositoryImp;
 
+import java.util.List;
+
 public class UserServiceImp implements UserService{
     private UserRepository userRepository = new UserRepositoryImp();
     @Override
@@ -24,6 +26,11 @@ public class UserServiceImp implements UserService{
     @Override
     public boolean delete(User user){
         return userRepository.delete(user);
+    }
+
+    @Override
+    public List<User> getAll(){
+       return userRepository.getAll();
     }
 
 }

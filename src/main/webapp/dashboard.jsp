@@ -1,3 +1,5 @@
+<%@ page import="dev.yassiraitelghari.domain.User" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +49,7 @@
             transition: 0.5s;
             overflow: hidden;
         }
+
         .navigation.active {
             width: 80px;
         }
@@ -84,6 +87,7 @@
             text-decoration: none;
             color: var(--white);
         }
+
         .navigation ul li:hover a,
         .navigation ul li.hovered a {
             color: var(--blue);
@@ -97,6 +101,7 @@
             line-height: 75px;
             text-align: center;
         }
+
         .navigation ul li a .icon ion-icon {
             font-size: 1.75rem;
         }
@@ -125,6 +130,7 @@
             box-shadow: 35px 35px 0 10px var(--white);
             pointer-events: none;
         }
+
         .navigation ul li:hover a::after,
         .navigation ul li.hovered a::after {
             content: "";
@@ -148,6 +154,7 @@
             background: var(--white);
             transition: 0.5s;
         }
+
         .main.active {
             width: calc(100% - 80px);
             left: 80px;
@@ -262,6 +269,7 @@
         .cardBox .card:hover {
             background: var(--blue);
         }
+
         .cardBox .card:hover .numbers,
         .cardBox .card:hover .cardName,
         .cardBox .card:hover .iconBx {
@@ -273,10 +281,6 @@
             position: relative;
             width: 100%;
             padding: 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            grid-gap: 30px;
-            /* margin-top: 10px; */
         }
 
         .details .recentOrders {
@@ -294,10 +298,12 @@
             justify-content: space-between;
             align-items: flex-start;
         }
+
         .cardHeader h2 {
             font-weight: 600;
             color: var(--blue);
         }
+
         .cardHeader .btn {
             position: relative;
             padding: 5px 10px;
@@ -312,32 +318,41 @@
             border-collapse: collapse;
             margin-top: 10px;
         }
+
         .details table thead td {
             font-weight: 600;
         }
+
         .details .recentOrders table tr {
             color: var(--black1);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
+
         .details .recentOrders table tr:last-child {
             border-bottom: none;
         }
+
         .details .recentOrders table tbody tr:hover {
             background: var(--blue);
             color: var(--white);
         }
+
         .details .recentOrders table tr td {
             padding: 10px;
         }
+
         .details .recentOrders table tr td:last-child {
-            text-align: end;
+            text-align: center;
         }
+
         .details .recentOrders table tr td:nth-child(2) {
-            text-align: end;
+            text-align: center;
         }
+
         .details .recentOrders table tr td:nth-child(3) {
             text-align: center;
         }
+
         .status.delivered {
             padding: 2px 4px;
             background: #8de02c;
@@ -346,6 +361,7 @@
             font-size: 14px;
             font-weight: 500;
         }
+
         .status.pending {
             padding: 2px 4px;
             background: #e9b10a;
@@ -354,6 +370,7 @@
             font-size: 14px;
             font-weight: 500;
         }
+
         .status.return {
             padding: 2px 4px;
             background: #f00;
@@ -362,6 +379,7 @@
             font-size: 14px;
             font-weight: 500;
         }
+
         .status.inProgress {
             padding: 2px 4px;
             background: #1795ce;
@@ -380,6 +398,7 @@
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
             border-radius: 20px;
         }
+
         .recentCustomers .imgBx {
             position: relative;
             width: 40px;
@@ -387,6 +406,7 @@
             border-radius: 50px;
             overflow: hidden;
         }
+
         .recentCustomers .imgBx img {
             position: absolute;
             top: 0;
@@ -395,22 +415,27 @@
             height: 100%;
             object-fit: cover;
         }
+
         .recentCustomers table tr td {
             padding: 12px 10px;
         }
+
         .recentCustomers table tr td h4 {
             font-size: 16px;
             font-weight: 500;
             line-height: 1.2rem;
         }
+
         .recentCustomers table tr td h4 span {
             font-size: 14px;
             color: var(--black2);
         }
+
         .recentCustomers table tr:hover {
             background: var(--blue);
             color: var(--white);
         }
+
         .recentCustomers table tr:hover td h4 span {
             color: var(--white);
         }
@@ -420,17 +445,21 @@
             .navigation {
                 left: -300px;
             }
+
             .navigation.active {
                 width: 300px;
                 left: 0;
             }
+
             .main {
                 width: 100%;
                 left: 0;
             }
+
             .main.active {
                 left: 300px;
             }
+
             .cardBox {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -440,9 +469,11 @@
             .details {
                 grid-template-columns: 1fr;
             }
+
             .recentOrders {
                 overflow-x: auto;
             }
+
             .status.inProgress {
                 white-space: nowrap;
             }
@@ -452,24 +483,30 @@
             .cardBox {
                 grid-template-columns: repeat(1, 1fr);
             }
+
             .cardHeader h2 {
                 font-size: 20px;
             }
+
             .user {
                 min-width: 40px;
             }
+
             .navigation {
                 width: 100%;
                 left: -100%;
                 z-index: 1000;
             }
+
             .navigation.active {
                 width: 100%;
                 left: 0;
             }
+
             .toggle {
                 z-index: 10001;
             }
+
             .main.active .toggle {
                 color: #fff;
                 position: fixed;
@@ -583,50 +620,41 @@
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers">1,504</div>
-                    <div class="cardName">Daily Views</div>
+                    <div class="numbers">
+                        <% out.println((int) request.getAttribute("size"));%>
+                    </div>
+                    <div class="cardName">Users</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="eye-outline"></ion-icon>
+                    <ion-icon name="people-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
                 <div>
                     <div class="numbers">80</div>
-                    <div class="cardName">Sales</div>
+                    <div class="clipboard-outline">Tasks</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <ion-icon name="clipboard-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
                 <div>
                     <div class="numbers">284</div>
-                    <div class="cardName">Comments</div>
+                    <div class="cardName">Tags</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                    <ion-icon name="pricetag-outline"></ion-icon>
                 </div>
             </div>
 
-            <div class="card">
-                <div>
-                    <div class="numbers">$7,842</div>
-                    <div class="cardName">Earning</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="cash-outline"></ion-icon>
-                </div>
-            </div>
         </div>
 
-        <!-- ================ Order Details List ================= -->
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
@@ -637,154 +665,30 @@
                 <table>
                     <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
+                        <td>Email</td>
+                        <td>Username</td>
+                        <td>Role</td>
+                        <td>Add Tasks</td>
                     </tr>
                     </thead>
-
                     <tbody>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
+                    <%
+                        List<User> users = (List<User>) request.getAttribute("users");
+                        for (User user : users) {
+                            out.println("<tr>");
+                            out.println("<td>" + user.getEmail() + "</td>");
+                            out.println("<td>" + user.getUsername() + "</td>");
+                            out.println("<td>" + user.getRole() + "</td>");
+                            out.println("<td><a href='#'><img style ='height : 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
+                            out.println("</tr>");
+                        }
+                    %>
                     </tbody>
-                </table>
-            </div>
 
-            <!-- ================= New Customers ================ -->
-            <div class="recentCustomers">
-                <div class="cardHeader">
-                    <h2>Recent Customers</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>
+
     </div>
 </div>
 
