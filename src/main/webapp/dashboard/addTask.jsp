@@ -347,7 +347,7 @@
         <div class="flex items-center justify-center p-12 mt-12 ">
             <!-- Author: FormBold Team -->
             <div class="mx-auto w-full max-w-[550px] bg-white">
-                <form>
+                <form action="addTask" method="post">
                     <div class="mb-5">
                         <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
                             Task Title
@@ -359,25 +359,25 @@
                         <label  class="mb-3 block text-base font-medium text-[#07074D]">
                             Task Description
                         </label>
-                        <textarea rows="10"
+                        <textarea rows="10" id="description" name="description"
                                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
                     </div>
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="date" class="mb-3 block text-base font-medium text-[#07074D]">
+                                <label for="startDate" class="mb-3 block text-base font-medium text-[#07074D]">
                                     Start Date
                                 </label>
-                                <input type="date" name="date" id="date"
+                                <input type="date" name="startDate" id="startDate"
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="time" class="mb-3 block text-base font-medium text-[#07074D]">
+                                <label for="startTime" class="mb-3 block text-base font-medium text-[#07074D]">
                                     Start Time
                                 </label>
-                                <input type="time" name="time" id="time"
+                                <input type="time" name="startTime" id="startTime"
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
@@ -386,26 +386,26 @@
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="date" class="mb-3 block text-base font-medium text-[#07074D]">
+                                <label for="dateLimit" class="mb-3 block text-base font-medium text-[#07074D]">
                                     End Date
                                 </label>
-                                <input type="date" name="date" id="date"
+                                <input type="date" name="dateLimit" id="dateLimit"
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="time" class="mb-3 block text-base font-medium text-[#07074D]">
+                                <label for="timeLimit" class="mb-3 block text-base font-medium text-[#07074D]">
                                     End Time
                                 </label>
-                                <input type="time" name="time" id="time"
+                                <input type="time" name="timeLimit" id="timeLimit"
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <button
+                        <button type="submit"
                                 class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
                             Add Task
                         </button>

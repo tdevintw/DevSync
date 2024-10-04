@@ -533,7 +533,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="dashboard">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -611,7 +611,7 @@
             </div>
 
             <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+                <img src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user" alt="">
             </div>
         </div>
 
