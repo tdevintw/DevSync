@@ -1,5 +1,6 @@
 <%@ page import="dev.yassiraitelghari.domain.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="dev.yassiraitelghari.utils.TaskErrors" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -352,14 +353,25 @@
                         <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
                             Task Title
                         </label>
-                        <input type="text" name="name" id="name" placeholder="Full Name"
+                        <% TaskErrors taskErrors = (TaskErrors) request.getAttribute("error");
+                            if(taskErrors!=null && taskErrors.getTitleError()!=null){
+                                out.println("<p style='color:red;margin-bottom:5px;'>"+taskErrors.getTitleError()+"</p>");
+                            }
+                        %>
+                        <input type="text" name="name" id="name" placeholder="Task Name"
                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+
+
                     </div>
                     <div class="mb-5">
                         <label  class="mb-3 block text-base font-medium text-[#07074D]">
                             Task Description
                         </label>
-                        <textarea rows="10" id="description" name="description"
+                        <%if(taskErrors!=null && taskErrors.getDescriptionError()!=null){
+                                out.println("<p style='color:red;margin-bottom:5px;'>"+taskErrors.getDescriptionError()+"</p>");
+                            }
+                        %>
+                        <textarea rows="10" id="description" name="description" placeholder="Description..."
                                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
                     </div>
                     <div class="-mx-3 flex flex-wrap">
@@ -381,6 +393,10 @@
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
+                        <%if(taskErrors!=null && taskErrors.getStartDateError()!=null){
+                            out.println("<p style='color:red; padding-right: 0.75rem ; padding-left:0.75rem;margin-bottom:5px;'>"+taskErrors.getStartDateError()+"</p>");
+                        }
+                        %>
                     </div>
 
                     <div class="-mx-3 flex flex-wrap">
@@ -402,6 +418,10 @@
                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
+                        <%if(taskErrors!=null && taskErrors.getEndDateError()!=null){
+                            out.println("<p style='color:red;padding-right: 0.75rem ; padding-left:0.75rem;margin-bottom:5px;'>"+taskErrors.getEndDateError()+"</p>");
+                        }
+                        %>
                     </div>
 
                     <div>
