@@ -114,5 +114,26 @@ public class UserRepositoryImp implements UserRepository {
             entityManager.close();
         }
     }
+
+    @Override
+    public User findById(int id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        User user = null;
+        try{
+            entityManager.getTransaction().begin();
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE id = :id" , User.class);
+            query.setParameter("id" , id);
+            user = query.getSingleResult();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace(); // Log the exception
+        } finally {
+            entityManager.close();
+        }
+        return user;
+    }
 }
 

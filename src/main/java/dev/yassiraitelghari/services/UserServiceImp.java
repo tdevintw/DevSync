@@ -33,4 +33,9 @@ public class UserServiceImp implements UserService{
        return userRepository.getAll();
     }
 
+    @Override
+    public User findById(int id){
+        return userRepository.findById(id);
+    }
+
 }

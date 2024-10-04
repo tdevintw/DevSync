@@ -14,4 +14,6 @@ public interface UserRepository {
     boolean delete(User user);
 
     List<User> getAll();
+
+    User findById(int id);
 }
