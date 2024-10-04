@@ -1,5 +1,6 @@
 package dev.yassiraitelghari.web;
 
+import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.services.TaskService;
 import dev.yassiraitelghari.services.TaskServiceImp;
@@ -40,6 +41,8 @@ public class AddTaskServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TaskErrors taskError = new TaskErrors();
+        LocalDateTime startLocalDateTime = null;
+        LocalDateTime endLocalDateTime = null;
         boolean isErrorExist = false;
         String title = request.getParameter("name");
         String description = request.getParameter("description");
@@ -69,7 +72,7 @@ public class AddTaskServlet extends HttpServlet {
         } else {
             LocalDate date = LocalDate.parse(startDate, dateFormatter);
             LocalTime time = LocalTime.parse(startTime, timeFormatter);
-            LocalDateTime startLocalDateTime = LocalDateTime.of(date, time);
+            startLocalDateTime = LocalDateTime.of(date, time);
             if (!taskService.validateStartDate(startLocalDateTime)) {
                 taskError.setStartDateError("Date cant be in the past");
                 isErrorExist = true;
@@ -83,7 +86,7 @@ public class AddTaskServlet extends HttpServlet {
         } else {
             LocalDate endDate = LocalDate.parse(dateLimit, dateFormatter);
             LocalTime endTime = LocalTime.parse(timeLimit, timeFormatter);
-            LocalDateTime endLocalDateTime = LocalDateTime.of(endDate, endTime);
+            endLocalDateTime = LocalDateTime.of(endDate, endTime);
             if (!taskService.validateDateLimit(endLocalDateTime)) {
                 taskError.setEndDateError("End Date cant be in the pass");
                 isErrorExist = true;
@@ -94,6 +97,14 @@ public class AddTaskServlet extends HttpServlet {
             request.setAttribute("error", taskError);
             request.getRequestDispatcher("dashboard/addTask.jsp").forward(request, response);
         } else {
+            Task task = new Task();
+            task.setName(title);
+            task.setDescription(description);
+            task.setUser((User)request.getAttribute("user"));
+            task.setDateLimit(startLocalDateTime);
+            task.setDateLimit(endLocalDateTime);
+            task.setStatus("In Progress");
+            taskService.add(task);
             response.sendRedirect("profile");
         }
     }

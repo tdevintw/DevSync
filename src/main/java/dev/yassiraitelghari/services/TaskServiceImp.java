@@ -1,9 +1,14 @@
 package dev.yassiraitelghari.services;
 
+import dev.yassiraitelghari.domain.Task;
+import dev.yassiraitelghari.repositories.TaskRepository;
+import dev.yassiraitelghari.repositories.TaskRepositoryImp;
+
 import java.time.LocalDateTime;
 
 public class TaskServiceImp implements TaskService{
 
+    private TaskRepository taskRepository = new TaskRepositoryImp();
     public boolean validateTitle(String title){
         return title.length() >= 3;
     }
@@ -18,6 +23,10 @@ public class TaskServiceImp implements TaskService{
 
     public boolean validateDateLimit(LocalDateTime dateLimit){
         return dateLimit.isAfter(LocalDateTime.now().plusMinutes(2));
+    }
+
+    public Task add(Task task){
+        return taskRepository.add(task);
     }
 
 }

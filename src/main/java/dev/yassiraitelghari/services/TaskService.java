@@ -1,5 +1,7 @@
 package dev.yassiraitelghari.services;
 
+import dev.yassiraitelghari.domain.Task;
+
 import java.time.LocalDateTime;
 
 public interface TaskService {
@@ -10,4 +12,6 @@ public interface TaskService {
     boolean validateStartDate(LocalDateTime startDate);
 
     boolean validateDateLimit(LocalDateTime dateLimit);
+
+    Task add(Task tak);
 }
