@@ -23,13 +23,14 @@ import java.time.format.DateTimeFormatter;
 public class AddTaskServlet extends HttpServlet {
     private UserService userService = new UserServiceImp();
     private TaskService taskService = new TaskServiceImp();
-
+    private User userWithTask;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String stringId = request.getParameter("id");
         if (stringId != null) {
             int id = Integer.parseInt(stringId);
             User user = userService.findById(id);
+            userWithTask= user;
             if (user != null) {
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("dashboard/addTask.jsp").forward(request, response);
@@ -52,7 +53,7 @@ public class AddTaskServlet extends HttpServlet {
         String timeLimit = request.getParameter("timeLimit");
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
 
         if (title == null || !taskService.validateTitle(title)) {
@@ -87,8 +88,8 @@ public class AddTaskServlet extends HttpServlet {
             LocalDate endDate = LocalDate.parse(dateLimit, dateFormatter);
             LocalTime endTime = LocalTime.parse(timeLimit, timeFormatter);
             endLocalDateTime = LocalDateTime.of(endDate, endTime);
-            if (!taskService.validateDateLimit(endLocalDateTime)) {
-                taskError.setEndDateError("End Date cant be in the pass");
+            if (!taskService.validateDateLimit(endLocalDateTime , startLocalDateTime)) {
+                taskError.setEndDateError("End Date cant be before start Date");
                 isErrorExist = true;
 
             }
@@ -100,8 +101,10 @@ public class AddTaskServlet extends HttpServlet {
             Task task = new Task();
             task.setName(title);
             task.setDescription(description);
-            task.setUser((User)request.getAttribute("user"));
-            task.setDateLimit(startLocalDateTime);
+            if(userWithTask!=null){
+                task.setUser(userWithTask);
+            }
+            task.setStartDate(startLocalDateTime);
             task.setDateLimit(endLocalDateTime);
             task.setStatus("In Progress");
             taskService.add(task);

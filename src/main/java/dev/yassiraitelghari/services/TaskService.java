@@ -11,7 +11,7 @@ public interface TaskService {
 
     boolean validateStartDate(LocalDateTime startDate);
 
-    boolean validateDateLimit(LocalDateTime dateLimit);
+    boolean validateDateLimit(LocalDateTime dateLimit , LocalDateTime startDate);
 
     Task add(Task tak);
 }

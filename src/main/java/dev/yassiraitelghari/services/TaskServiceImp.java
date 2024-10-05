@@ -21,8 +21,8 @@ public class TaskServiceImp implements TaskService{
         return startDate.isAfter(LocalDateTime.now().plusMinutes(1));
     }
 
-    public boolean validateDateLimit(LocalDateTime dateLimit){
-        return dateLimit.isAfter(LocalDateTime.now().plusMinutes(2));
+    public boolean validateDateLimit(LocalDateTime dateLimit , LocalDateTime startDate){
+        return dateLimit.isAfter(startDate.plusMinutes(2));
     }
 
     public Task add(Task task){
