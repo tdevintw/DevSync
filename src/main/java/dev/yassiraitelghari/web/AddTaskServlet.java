@@ -24,19 +24,20 @@ public class AddTaskServlet extends HttpServlet {
     private UserService userService = new UserServiceImp();
     private TaskService taskService = new TaskServiceImp();
     private User userWithTask;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String stringId = request.getParameter("id");
         if (stringId != null) {
             int id = Integer.parseInt(stringId);
             User user = userService.findById(id);
-            userWithTask= user;
+            userWithTask = user;
             if (user != null) {
                 request.setAttribute("user", user);
-                request.getRequestDispatcher("dashboard/addTask.jsp").forward(request, response);
+                request.getRequestDispatcher("/dashboard/addTask.jsp").forward(request, response);
             }
         }
-        response.sendRedirect("profile");
+        response.sendRedirect("../profile");
     }
 
     @Override
@@ -88,7 +89,7 @@ public class AddTaskServlet extends HttpServlet {
             LocalDate endDate = LocalDate.parse(dateLimit, dateFormatter);
             LocalTime endTime = LocalTime.parse(timeLimit, timeFormatter);
             endLocalDateTime = LocalDateTime.of(endDate, endTime);
-            if (!taskService.validateDateLimit(endLocalDateTime , startLocalDateTime)) {
+            if (!taskService.validateDateLimit(endLocalDateTime, startLocalDateTime)) {
                 taskError.setEndDateError("End Date cant be before start Date");
                 isErrorExist = true;
 
@@ -96,19 +97,22 @@ public class AddTaskServlet extends HttpServlet {
         }
         if (isErrorExist) {
             request.setAttribute("error", taskError);
-            request.getRequestDispatcher("dashboard/addTask.jsp").forward(request, response);
+            request.getRequestDispatcher("/dashboard/addTask.jsp").forward(request, response);
         } else {
             Task task = new Task();
             task.setName(title);
             task.setDescription(description);
-            if(userWithTask!=null){
+            if (userWithTask != null) {
                 task.setUser(userWithTask);
             }
             task.setStartDate(startLocalDateTime);
             task.setDateLimit(endLocalDateTime);
             task.setStatus("In Progress");
-            taskService.add(task);
-            response.sendRedirect("profile");
+            request.getSession().setAttribute("task",task);
+            response.sendRedirect("addTags");
+
+//            taskService.add(task);
+//            response.sendRedirect("profile");
         }
     }
 }

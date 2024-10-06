@@ -1,4 +1,4 @@
-<%@ page import="dev.yassiraitelghari.domain.User" %>
+<%@ page import="dev.yassiraitelghari.domain.Task" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dev.yassiraitelghari.utils.TaskErrors" %>
 <!DOCTYPE html>
@@ -9,18 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
+
     <!-- ======= Styles ====== -->
     <style>
         /* =========== Google Fonts ============ */
@@ -166,6 +155,9 @@
             min-height: 100vh;
             background: var(--white);
             transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .main.active {
@@ -240,10 +232,31 @@
             object-fit: cover;
         }
 
-
-
-
         /* ====================== Responsive Design ========================== */
+        @media (min-width: 1980px) {
+            .tag-container {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 1980px) {
+            .tag-container {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .tag-container {
+                width: 60%;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .tag-container {
+                width: 70%;
+            }
+        }
+
         @media (max-width: 991px) {
             .navigation {
                 left: -300px;
@@ -279,6 +292,9 @@
 
             .status.inProgress {
                 white-space: nowrap;
+            }
+            .tag-container {
+                width: 80%;
             }
         }
 
@@ -316,6 +332,91 @@
                 right: 0;
                 left: initial;
             }
+            .tag-container {
+                width: 90%;
+            }
+        }
+
+        .tag-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #e3e1e1;
+        }
+
+        .input-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 5px;
+        }
+
+        .input-container ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .input-container ul li {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container ul li .remove-tag {
+            background: none;
+            border: none;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .remaining-tags {
+            margin: 10px 0;
+        }
+
+        #remove-all {
+            background-color: #2a2185;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #remove-all:hover {
+            background-color: rgb(0, 0, 123); /* Slightly darker blue for hover effect */
+        }
+        .confirm button{
+            background-color: #231d63;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            width: 7rem;
         }
 
     </style>
@@ -323,8 +424,9 @@
 
 <body>
 <!-- =============== Navigation ================ -->
+<jsp:include page="../components/aside.jsp" />
+
 <div class="container">
-    <jsp:include page="../components/aside.jsp" />
     <!-- ========================= Main ==================== -->
     <div class="main">
         <div class="topbar">
@@ -334,108 +436,100 @@
 
             <div class="search">
                 <label>
-                    <input type="text" placeholder="Search here">
+                    <input type="text" placeholder="Search here" />
                     <ion-icon name="search-outline"></ion-icon>
                 </label>
             </div>
 
             <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+                <img src="assets/imgs/customer01.jpg" alt="" />
             </div>
         </div>
+        <h1
+                style="
+            width: 100%;
+            margin-top: 5rem;
+            padding-left: 2rem;
+            font-size: large;
+          "
+        >
+            <% out.println("Add Tags for Task :"+((Task)request.getSession().getAttribute("task")).getName());%>
 
-
-        <div class="flex items-center justify-center p-12 mt-12 ">
-            <!-- Author: FormBold Team -->
-            <div class="mx-auto w-full max-w-[550px] bg-white">
-                <form action="addTask" method="post">
-                    <div class="mb-5">
-                        <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-                            Task Title
-                        </label>
-                        <% TaskErrors taskErrors = (TaskErrors) request.getAttribute("error");
-                            if(taskErrors!=null && taskErrors.getTitleError()!=null){
-                                out.println("<p style='color:red;margin-bottom:5px;'>"+taskErrors.getTitleError()+"</p>");
-                            }
-                        %>
-                        <input type="text" name="name" id="name" placeholder="Task Name"
-                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-
-
-                    </div>
-                    <div class="mb-5">
-                        <label  class="mb-3 block text-base font-medium text-[#07074D]">
-                            Task Description
-                        </label>
-                        <%if(taskErrors!=null && taskErrors.getDescriptionError()!=null){
-                            out.println("<p style='color:red;margin-bottom:5px;'>"+taskErrors.getDescriptionError()+"</p>");
-                        }
-                        %>
-                        <textarea rows="10" id="description" name="description" placeholder="Description..."
-                                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
-                    </div>
-                    <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                                <label for="startDate" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Start Date
-                                </label>
-                                <input type="date" name="startDate" id="startDate"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
-                        </div>
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                                <label for="startTime" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Start Time
-                                </label>
-                                <input type="time" name="startTime" id="startTime"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
-                        </div>
-                        <%if(taskErrors!=null && taskErrors.getStartDateError()!=null){
-                            out.println("<p style='color:red; padding-right: 0.75rem ; padding-left:0.75rem;margin-bottom:5px;'>"+taskErrors.getStartDateError()+"</p>");
-                        }
-                        %>
-                    </div>
-
-                    <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                                <label for="dateLimit" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    End Date
-                                </label>
-                                <input type="date" name="dateLimit" id="dateLimit"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
-                        </div>
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                                <label for="timeLimit" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    End Time
-                                </label>
-                                <input type="time" name="timeLimit" id="timeLimit"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
-                        </div>
-                        <%if(taskErrors!=null && taskErrors.getEndDateError()!=null){
-                            out.println("<p style='color:red;padding-right: 0.75rem ; padding-left:0.75rem;margin-bottom:5px;'>"+taskErrors.getEndDateError()+"</p>");
-                        }
-                        %>
-                    </div>
-                    <div>
-                        <button type="submit"
-                                class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                            Add Task
-                        </button>
-                    </div>
-                </form>
+        </h1>
+        <div class="tag-container">
+            <h2 style="margin-bottom: 20px">Tags</h2>
+            <p style="font-style: italic">
+                Press enter or add a comma after each tag
+            </p>
+            <div class="input-container">
+                <ul id="tags"></ul>
+                <input type="text" id="tag-input" placeholder="Add a tag" />
             </div>
+            <button id="remove-all">Remove All</button>
         </div>
-
+        <div class="confirm" style="margin-top: 3.5rem;display: flex;gap: 1rem;">
+            <form action="addTags" method="post">
+                <input type="hidden" name="cancel" value="cancel">
+            <button type="submit">Cancel Task</button>
+            </form>
+            <form action="addTags" method="post">
+                <input type="hidden" name="tags" value="cancel">
+                <button type="submit">Save</button>
+            </form>
+        </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tagInput = document.getElementById("tag-input");
+        const tagContainer = document.getElementById("tags");
+        const removeAllButton = document.getElementById("remove-all");
+        let tags = [];
 
+        tagInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter" || event.key === ",") {
+                event.preventDefault();
+                addTag(tagInput.value.trim());
+                tagInput.value = "";
+            }
+        });
+
+        removeAllButton.addEventListener("click", function() {
+            tags = [];
+            updateTags();
+        });
+
+        function addTag(tag) {
+            if (tag !== "" && !tags.includes(tag)) {
+                tags.push(tag);
+                updateTags();
+            }
+        }
+
+        function removeTag(index) {
+            tags.splice(index, 1);
+            updateTags();
+        }
+
+        function updateTags() {
+            tagContainer.innerHTML = "";
+            tags.forEach((tag, index) => {
+                const li = document.createElement("li");
+                li.textContent = tag;
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = "x";
+                removeBtn.classList.add("remove-tag");
+                removeBtn.addEventListener("click", function() {
+                    removeTag(index);
+                });
+                li.appendChild(removeBtn);
+                tagContainer.appendChild(li);
+            });
+            document.querySelector(".remaining-tags").textContent = `${8 - tags.length} tags are remaining`;
+        }
+    });
+
+</script>
 <script>
     // add hovered class to selected list item
     let list = document.querySelectorAll(".navigation li");

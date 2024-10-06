@@ -678,7 +678,7 @@
                             out.println("<td>" + user.getEmail() + "</td>");
                             out.println("<td>" + user.getUsername() + "</td>");
                             out.println("<td>" + user.getRole() + "</td>");
-                            out.println("<td><a href='addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
+                            out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
                             out.println("</tr>");
                         }
                     %>

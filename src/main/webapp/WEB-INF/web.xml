@@ -68,6 +68,16 @@
     
     <servlet-mapping>
         <servlet-name>AddTaskServlet</servlet-name>
-        <url-pattern>/addTask</url-pattern>
+        <url-pattern>/dashboard/addTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddTagsServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.AddTagsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTagsServlet</servlet-name>
+        <url-pattern>/dashboard/addTags</url-pattern>
     </servlet-mapping>
 </web-app>
