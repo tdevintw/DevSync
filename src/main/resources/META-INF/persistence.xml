@@ -6,13 +6,16 @@
 
     <persistence-unit name="PUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>dev.yassiraitelghari.domain.User</class> <!-- Add your entity classes here -->
+        <class>dev.yassiraitelghari.domain.User</class>
+        <class>dev.yassiraitelghari.domain.Tag</class>
+        <class>dev.yassiraitelghari.domain.Task</class>
+
 
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/DevSync"/>
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="ysrysr"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/DevSync"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="ysrysr"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>

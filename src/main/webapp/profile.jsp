@@ -1,3 +1,4 @@
+<%@ page import="dev.yassiraitelghari.domain.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,13 +31,14 @@
                         <div class="flex items-center px-2 lg:px-0">
                             <div class="hidden lg:ml-6 lg:block lg:space-x-4">
                                 <div class="flex">
-                                    <a href="#" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
+                                    <a href="profile" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
                                        x-state-description="undefined: &quot;bg-black bg-opacity-25&quot;, undefined: &quot;hover:bg-sky-800&quot;">Profile</a>
 
-                                    <a href="#" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
+
+                                    <a href="dashboard" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
                                        x-state-description="undefined: &quot;bg-black bg-opacity-25&quot;, undefined: &quot;hover:bg-sky-800&quot;">Dashboard</a>
 
-                                    <a href="#" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
+                                    <a href="logout" class="hover:bg-sky-800 rounded-md py-2 px-3 text-sm font-medium text-white"
                                        x-state-description="undefined: &quot;bg-black bg-opacity-25&quot;, undefined: &quot;hover:bg-sky-800&quot;">Logout</a>
 
                                 </div>

@@ -14,6 +14,8 @@ import java.io.IOException;
 
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
 public class ProfileServlet extends HttpServlet {
+
+
     private UserService userService =  new UserServiceImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +27,6 @@ public class ProfileServlet extends HttpServlet {
             }
         }
         response.sendRedirect("login");
-
     }
 
     @Override
@@ -39,7 +40,6 @@ public class ProfileServlet extends HttpServlet {
             User user = (User) request.getSession(false).getAttribute("user");
             if(userService.delete(user)){
                 request.getSession(false).invalidate();
-
             }
             response.sendRedirect("login");
             return;

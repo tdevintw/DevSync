@@ -2,6 +2,8 @@ package dev.yassiraitelghari.services;
 
 import dev.yassiraitelghari.domain.User;
 
+import java.util.List;
+
 public interface UserService {
     User add(User user);
 
@@ -10,5 +12,9 @@ public interface UserService {
     User update(User user);
 
     boolean delete(User user);
+
+    List<User> getAll();
+
+    User findById(int id) ;
 
 }

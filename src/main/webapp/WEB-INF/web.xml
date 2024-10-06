@@ -50,4 +50,34 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.AddTaskServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <url-pattern>/dashboard/addTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddTagsServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.AddTagsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTagsServlet</servlet-name>
+        <url-pattern>/dashboard/addTags</url-pattern>
+    </servlet-mapping>
 </web-app>

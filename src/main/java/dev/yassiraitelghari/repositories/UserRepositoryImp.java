@@ -8,6 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.util.Collections;
+import java.util.List;
+
 public class UserRepositoryImp implements UserRepository {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("PUnit");
 
@@ -93,5 +96,44 @@ public class UserRepositoryImp implements UserRepository {
         }
     }
 
+    @Override
+    public List<User> getAll() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            List<User> users = entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+            entityManager.getTransaction().commit();
+            return users;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public User findById(int id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        User user = null;
+        try{
+            entityManager.getTransaction().begin();
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE id = :id" , User.class);
+            query.setParameter("id" , id);
+            user = query.getSingleResult();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace(); // Log the exception
+        } finally {
+            entityManager.close();
+        }
+        return user;
+    }
 }
 
