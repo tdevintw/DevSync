@@ -1,6 +1,6 @@
 <%@ page import="dev.yassiraitelghari.domain.Task" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dev.yassiraitelghari.utils.TaskErrors" %>
+<%@ page import="dev.yassiraitelghari.utils.TagErrors" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -467,26 +467,32 @@
             </div>
             <button id="remove-all">Remove All</button>
         </div>
-        <div class="confirm" style="margin-top: 3.5rem;display: flex;gap: 1rem;">
+        <%
+        if(request.getAttribute("tagsError")!=null){
+
+            out.println("<h1 style='font-size: large;color: red;margin-top: 2rem;'>"+request.getAttribute("tagsError")+"</h1>");
+        }
+        %>
+        <div class="confirm" style="margin-top: 3.5rem; display: flex; gap: 1rem;">
             <form action="addTags" method="post">
                 <input type="hidden" name="cancel" value="cancel">
-            <button type="submit">Cancel Task</button>
+                <button type="submit">Cancel Task</button>
             </form>
-            <form action="addTags" method="post">
-                <input type="hidden" name="tags" value="cancel">
-                <button type="submit">Save</button>
+            <form action="addTags" method="post" id="tags-form">
+                <input type="hidden" name="tags" id="tags-input" value="">
+                <button type="submit" onclick="saveTags()">Save</button>
             </form>
         </div>
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const tagInput = document.getElementById("tag-input");
         const tagContainer = document.getElementById("tags");
         const removeAllButton = document.getElementById("remove-all");
         let tags = [];
 
-        tagInput.addEventListener("keypress", function(event) {
+        tagInput.addEventListener("keypress", function (event) {
             if (event.key === "Enter" || event.key === ",") {
                 event.preventDefault();
                 addTag(tagInput.value.trim());
@@ -494,7 +500,7 @@
             }
         });
 
-        removeAllButton.addEventListener("click", function() {
+        removeAllButton.addEventListener("click", function () {
             tags = [];
             updateTags();
         });
@@ -519,7 +525,7 @@
                 const removeBtn = document.createElement("button");
                 removeBtn.textContent = "x";
                 removeBtn.classList.add("remove-tag");
-                removeBtn.addEventListener("click", function() {
+                removeBtn.addEventListener("click", function () {
                     removeTag(index);
                 });
                 li.appendChild(removeBtn);
@@ -527,6 +533,11 @@
             });
             document.querySelector(".remaining-tags").textContent = `${8 - tags.length} tags are remaining`;
         }
+
+        // Function to save tags into the hidden input before form submission
+        window.saveTags = function() {
+            document.getElementById("tags-input").value = tags.join(", ");
+        };
     });
 
 </script>

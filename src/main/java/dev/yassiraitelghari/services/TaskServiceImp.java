@@ -29,4 +29,11 @@ public class TaskServiceImp implements TaskService{
         return taskRepository.add(task);
     }
 
+    public boolean isDateWithin3Days(LocalDateTime dateTime){
+        LocalDateTime maxRange = LocalDateTime.now().plusDays(3);
+        return !dateTime.isAfter(maxRange);
+
+    }
+
+
 }
