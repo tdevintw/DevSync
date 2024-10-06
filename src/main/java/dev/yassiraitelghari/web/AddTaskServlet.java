@@ -93,6 +93,9 @@ public class AddTaskServlet extends HttpServlet {
                 taskError.setEndDateError("End Date cant be before start Date");
                 isErrorExist = true;
 
+            }else if(!taskService.isDateLimitWithin3Days(endLocalDateTime)){
+                taskError.setEndDateError("End date must be within the next 3 days");
+                isErrorExist = true;
             }
         }
         if (isErrorExist) {
@@ -111,8 +114,6 @@ public class AddTaskServlet extends HttpServlet {
             request.getSession().setAttribute("task",task);
             response.sendRedirect("addTags");
 
-//            taskService.add(task);
-//            response.sendRedirect("profile");
         }
     }
 }

@@ -13,5 +13,7 @@ public interface TaskService {
 
     boolean validateDateLimit(LocalDateTime dateLimit , LocalDateTime startDate);
 
+    boolean isDateLimitWithin3Days(LocalDateTime dateTime);
+
     Task add(Task tak);
 }
