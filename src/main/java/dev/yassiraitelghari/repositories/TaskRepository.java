@@ -14,4 +14,6 @@ public interface TaskRepository {
 
     Task findTask(int taskId);
 
+    boolean delete(int id);
+
 }

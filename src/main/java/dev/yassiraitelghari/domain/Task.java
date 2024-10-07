@@ -34,6 +34,9 @@ public class Task {
     @OneToMany(mappedBy = "task")
     private List<Tag> tags;
 
+    @Column(name ="added_by_me")
+    private boolean addedByMe ;
+
     public Task(){};
 
     public int getId() {
@@ -98,5 +101,13 @@ public class Task {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public boolean isAddedByMe() {
+        return addedByMe;
+    }
+
+    public void setAddedByMe(boolean addedByMe) {
+        this.addedByMe = addedByMe;
     }
 }

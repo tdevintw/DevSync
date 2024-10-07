@@ -8,8 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
     <!-- ======= Styles ====== -->
     <style>
+
+
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
@@ -286,7 +290,6 @@
         .details .recentOrders {
             position: relative;
             display: grid;
-            min-height: 500px;
             background: var(--white);
             padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -677,7 +680,7 @@
             }
         }
 
-        .button-3  {
+        .button-3 {
             appearance: none;
             background-color: #2ea44f;
             border: 1px solid rgba(27, 31, 35, .15);
@@ -893,7 +896,9 @@
             </div>
         </div>
         <div style="display: flex ; justify-content: flex-end;margin-right: 3rem">
-            <form action="dashboard/addTask" method="get"><button type="submit" class="button-3">New Task</button></form>
+            <form action="dashboard/addTask" method="get">
+                <button type="submit" class="button-3">New Task</button>
+            </form>
         </div>
         <div class="details">
             <div class="recentOrders">
@@ -901,44 +906,53 @@
                     <h2>My tasks</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
+                <div style='overflow-x: auto; max-width: 100%;'>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td style="text-align: center">Title</td>
+                            <td style="text-align: center">Description</td>
+                            <td style="text-align: center">Status</td>
+                            <td style="text-align: center">Start Date</td>
+                            <td style="text-align: center">End Date</td>
+                            <td style="text-align: center">Edit Status</td>
+                            <td style="text-align: center">Action</td>
 
-                <table>
-                    <thead>
-                    <tr>
-                        <td style="text-align: center">Title</td>
-                        <td style="text-align: center">Description</td>
-                        <td style="text-align: center">Status</td>
-                        <td style="text-align: center">Start Date</td>
-                        <td style="text-align: center">End Date</td>
-                        <td style="text-align: center">Edit Status</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                        List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-                        for (Task task : tasks) {
-                            out.println("<tr>");
-                            out.println("<td style='text-align:center'>" + task.getName() + "</td>");
-                            out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
-                            out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
-                            out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
-                            out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
-                     if (task.getStatus().equals("In Progress")) {
-                        out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
-                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value="+task.getId()+"><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
-                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value="+task.getId()+"><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
-                        out.println("</dev></td>");
-                    } else {
-                        out.println("<td>Task "+task.getStatus()+"</td>\n");
-                    }
-
-                    out.println("</tr>");
-                    }
-                    %>
-                    </tbody>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%
+                            List<Task> tasks = (List<Task>) request.getAttribute("tasks");
+                            for (Task task : tasks) {
+                                out.println("<tr>");
+                                out.println("<td style='text-align:center'>" + task.getName() + "</td>");
+                                out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
+                                out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
+                                out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
+                                out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
+                                if (task.getStatus().equals("In Progress")) {
+                                    out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
+                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
+                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
+                                    out.println("</dev></td>");
+                                } else {
+                                    out.println("<td>Task " + task.getStatus() + "</td>\n");
+                                }
+                                out.println("<td><div style='display:flex;gap:5px;'>" +
+                                        "<button style='background-color:green' class='button-3'>Edit</button>" +
+                                        "<button style='background-color:gray' class='button-3'>Replace</button>");
+                                if (task.isAddedByMe()) {
+                                    out.println("<button  class='button-4'>Delete</button>");
+                                }
+                                out.println("<div></td>");
+                                out.println("</tr>");
+                            }
+                        %>
+                        </tbody>
 
 
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
 

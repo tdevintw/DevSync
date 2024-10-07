@@ -28,7 +28,7 @@ public class AddTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       User activeUser = (User) request.getSession().getAttribute("user");
-       if(activeUser.getRole().equals("Manager")){
+       if(activeUser.getRole().equals("MANAGER")){
            String stringId = request.getParameter("id");
            if (stringId != null) {
                int id = Integer.parseInt(stringId);
@@ -120,6 +120,7 @@ public class AddTaskServlet extends HttpServlet {
             task.setStartDate(startLocalDateTime);
             task.setDateLimit(endLocalDateTime);
             task.setStatus("In Progress");
+            task.setAddedByMe(!((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER"));
             request.getSession().setAttribute("task",task);
             response.sendRedirect("addTags");
 

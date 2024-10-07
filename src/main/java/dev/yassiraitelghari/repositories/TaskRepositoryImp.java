@@ -20,6 +20,7 @@ public class TaskRepositoryImp implements TaskRepository {
         entityManager.close();
         return task;
     }
+    @Override
 
     public List<Task> findTasks(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -42,6 +43,7 @@ public class TaskRepositoryImp implements TaskRepository {
         }
         return tasks;
     }
+    @Override
 
     public Task update(Task task){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -89,6 +91,29 @@ public class TaskRepositoryImp implements TaskRepository {
         }
         return task;
    }
+    @Override
 
+    public boolean delete(int id){
+         EntityManager entityManager = entityManagerFactory.createEntityManager();
+         try {
+             entityManager.getTransaction().begin();
+             Task task = entityManager.find(Task.class, id);
+             if (task != null) {
+                 entityManager.remove(task);
+                 entityManager.getTransaction().commit();
+                 return true;
+             } else {
+                 entityManager.getTransaction().rollback();
+                 return false;
+             }
+
+         }catch (Exception e){
+             if(entityManager.getTransaction().isActive()){
+                 entityManager.getTransaction().rollback();
+             }
+             e.printStackTrace();
+         }
+         return true;
+   }
 }
 

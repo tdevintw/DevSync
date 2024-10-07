@@ -47,4 +47,9 @@ public class TaskServiceImp implements TaskService{
         return taskRepository.findTask(taskId);
     }
 
+    public boolean delete(int id){
+        return taskRepository.delete(id);
+    }
+
+
 }

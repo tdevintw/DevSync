@@ -24,4 +24,6 @@ public interface TaskService {
 
     Task findTask(int taskId);
 
+    boolean delete(int id);
+
 }
