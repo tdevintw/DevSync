@@ -27,16 +27,23 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String stringId = request.getParameter("id");
-        if (stringId != null) {
-            int id = Integer.parseInt(stringId);
-            User user = userService.findById(id);
-            userWithTask = user;
-            if (user != null) {
-                request.setAttribute("user", user);
-                request.getRequestDispatcher("/dashboard/addTask.jsp").forward(request, response);
-            }
-        }
+      User activeUser = (User) request.getSession().getAttribute("user");
+       if(activeUser.getRole().equals("Manager")){
+           String stringId = request.getParameter("id");
+           if (stringId != null) {
+               int id = Integer.parseInt(stringId);
+               User user = userService.findById(id);
+               userWithTask = user;
+               if (user != null) {
+                   request.setAttribute("user", user);
+                   request.getRequestDispatcher("/dashboard/addTask.jsp").forward(request, response);
+               }
+           }
+       }else{
+           userWithTask = activeUser;
+           request.setAttribute("user", activeUser);
+           request.getRequestDispatcher("/dashboard/addTask.jsp").forward(request, response);
+       }
         response.sendRedirect("../profile");
     }
 

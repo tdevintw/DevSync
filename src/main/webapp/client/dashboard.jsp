@@ -892,7 +892,7 @@
                 </div>
             </div>
         </div>
-        <div style="display: flex ; justify-content: flex-end">
+        <div style="display: flex ; justify-content: flex-end;margin-right: 3rem">
             <form action="dashboard/addTask" method="get"><button type="submit" class="button-3">New Task</button></form>
         </div>
         <div class="details">
