@@ -80,4 +80,15 @@
         <servlet-name>AddTagsServlet</servlet-name>
         <url-pattern>/dashboard/addTags</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.UpdateTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <url-pattern>/dashboard/update</url-pattern>
+    </servlet-mapping>
+
 </web-app>
