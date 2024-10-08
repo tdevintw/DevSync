@@ -35,7 +35,7 @@ public class DeleteTaskServlet extends HttpServlet {
                 user.setDeleteJeton(0);
                 userService.update(user);
             } else {
-                request.getSession().setAttribute("insufficient_delete_token", "insufficient Delete Token , wait until next month");
+                request.getSession().setAttribute("insufficient_token", "insufficient Delete Token , wait until next month");
             }
 
         }

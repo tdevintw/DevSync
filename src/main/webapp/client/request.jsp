@@ -899,7 +899,7 @@
 
                                <textarea rows="10" id="description" name="message" placeholder="Message ..."
                                          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
-          <button class="button-3" type="submit">Send</button>
+          <button style="width: 100%" class="button-3" type="submit">Send</button>
             </form>
         <%
         if(request.getAttribute("error")!=null){
