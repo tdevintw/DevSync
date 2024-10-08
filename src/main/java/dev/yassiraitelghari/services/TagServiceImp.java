@@ -16,4 +16,8 @@ public class TagServiceImp implements TagService{
         }
         return true;
     }
+
+    public boolean deleteByTask(int task_id){
+        return tagRepository.deleteByTask(task_id);
+    }
 }

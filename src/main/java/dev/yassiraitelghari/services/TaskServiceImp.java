@@ -5,6 +5,7 @@ import dev.yassiraitelghari.repositories.TaskRepository;
 import dev.yassiraitelghari.repositories.TaskRepositoryImp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TaskServiceImp implements TaskService{
 
@@ -32,7 +33,22 @@ public class TaskServiceImp implements TaskService{
     public boolean isDateWithin3Days(LocalDateTime dateTime){
         LocalDateTime maxRange = LocalDateTime.now().plusDays(3);
         return !dateTime.isAfter(maxRange);
+    }
 
+    public List<Task> findTasks(int id){
+        return taskRepository.findTasks(id);
+    }
+
+    public Task update(Task task){
+        return taskRepository.update(task);
+    }
+
+    public Task findTask(int taskId){
+        return taskRepository.findTask(taskId);
+    }
+
+    public boolean delete(int id){
+        return taskRepository.delete(id);
     }
 
 
