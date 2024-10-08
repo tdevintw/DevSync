@@ -50,6 +50,8 @@ public class RegisterServlet extends HttpServlet {
         user.setLastName(lastName);
         user.setPassword(password);
         user.setRole(role);
+        user.setDeleteJeton(1);
+        user.setReplaceJeton(2);
         if (userService.add(user) != null) {
             response.sendRedirect("login");
         } else {

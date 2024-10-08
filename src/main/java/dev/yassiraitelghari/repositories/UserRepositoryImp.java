@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
 import java.util.Collections;
 import java.util.List;
@@ -134,6 +133,47 @@ public class UserRepositoryImp implements UserRepository {
             entityManager.close();
         }
         return user;
+    }
+
+    @Override
+    public boolean updateReplaceToken(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("UPDATE User user SET user.replaceJeton =  2");
+            int rowsAffected = query.executeUpdate();
+            entityManager.getTransaction().commit();
+            return rowsAffected>0;
+        }catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return true;
+    }
+
+
+    @Override
+    public boolean updateDeleteToken(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("UPDATE User user SET user.deleteJeton =  1");
+            int rowsAffected = query.executeUpdate();
+            entityManager.getTransaction().commit();
+            return rowsAffected>0;
+        }catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return true;
     }
 }
 

@@ -938,12 +938,14 @@
                                 } else {
                                     out.println("<td>Task " + task.getStatus() + "</td>\n");
                                 }
-                                out.println("<td><div style='display:flex;gap:5px;'>" +
-                                        "<button style='background-color:gray' class='button-3'>Replace</button>");
+
                                 if (task.isAddedByMe()) {
                                     out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                    out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value="+task.getId()+"><button type='submit' class='button-4'>Delete</button></form>");
+                                }else{
+                                    out.println("<td><div style='display:flex;gap:5px;justify-content:center'>" +
+                                            "<button style='background-color:gray' class='button-3'>Replace</button>");
                                 }
+                                out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value="+task.getId()+"><button type='submit' class='button-4'>Delete</button></form>");
                                 out.println("<div></td>");
                                 out.println("</tr>");
                             }

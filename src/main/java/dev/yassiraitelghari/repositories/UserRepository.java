@@ -16,4 +16,9 @@ public interface UserRepository {
     List<User> getAll();
 
     User findById(int id);
+
+    boolean updateReplaceToken();
+
+    boolean updateDeleteToken();
+
 }

@@ -17,4 +17,9 @@ public interface UserService {
 
     User findById(int id) ;
 
+    boolean updateReplaceToken();
+
+    boolean updateDeleteToken();
+
+
 }

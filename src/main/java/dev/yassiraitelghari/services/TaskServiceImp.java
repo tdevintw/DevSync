@@ -51,5 +51,9 @@ public class TaskServiceImp implements TaskService{
         return taskRepository.delete(id);
     }
 
+    public boolean updateTasks(int user_id){
+       return taskRepository.updateTasks(user_id);
+    }
+
 
 }

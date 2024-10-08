@@ -33,26 +33,36 @@
         @OneToMany
         private List<Task> tasks;
 
-        public User(int id, String username,String email ,String name, String password, String role , String lastName , List<Task> tasks) {
+        @Column(name = "replace_jeton")
+        private int replaceJeton;
+
+        @Column(name = "delete_jeton")
+        private int deleteJeton;
+
+
+        public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.id = id;
             this.username = username;
-            this.email = email;
             this.name = name;
+            this.lastName = lastName;
+            this.email = email;
             this.password = password;
             this.role = role;
-            this.lastName = lastName;
             this.tasks = tasks;
-
+            this.replaceJeton = replaceJeton;
+            this.deleteJeton = deleteJeton;
         }
 
-        public User(String username,String email,String name, String password, String role, String lastName ,  List<Task> tasks) {
+        public User(String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.username = username;
-            this.email = email;
             this.name = name;
+            this.lastName = lastName;
+            this.email = email;
             this.password = password;
             this.role = role;
-            this.lastName = lastName;
             this.tasks = tasks;
+            this.replaceJeton = replaceJeton;
+            this.deleteJeton = deleteJeton;
         }
 
         public User() {
@@ -121,5 +131,21 @@
 
         public void setTasks(List<Task> tasks) {
             this.tasks = tasks;
+        }
+
+        public int getReplaceJeton() {
+            return replaceJeton;
+        }
+
+        public void setReplaceJeton(int replaceJeton) {
+            this.replaceJeton = replaceJeton;
+        }
+
+        public int getDeleteJeton() {
+            return deleteJeton;
+        }
+
+        public void setDeleteJeton(int deleteJeton) {
+            this.deleteJeton = deleteJeton;
         }
     }

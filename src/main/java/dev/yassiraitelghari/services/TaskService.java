@@ -26,4 +26,6 @@ public interface TaskService {
 
     boolean delete(int id);
 
+    boolean updateTasks(int user_id);
+
 }

@@ -33,7 +33,10 @@ public class DashboardServlet extends HttpServlet {
                 request.setAttribute("size", users.size());
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             } else if (user.getRole().equals("CLIENT")) {
-                List<Task> tasks = taskService.findTasks(user.getId());
+                List<Task> tasks = null;
+                if(taskService.updateTasks(user.getId())){
+                    tasks = taskService.findTasks(user.getId());
+                }
                 request.setAttribute("tasks", tasks);
                 request.setAttribute("size", tasks.size());
                 request.getRequestDispatcher("client/dashboard.jsp").forward(request, response);
