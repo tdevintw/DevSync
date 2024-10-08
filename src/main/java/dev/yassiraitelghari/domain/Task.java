@@ -37,6 +37,9 @@ public class Task {
     @Column(name ="added_by_me")
     private boolean addedByMe ;
 
+    @OneToOne(mappedBy = "task")
+    private  Request request;
+
     public Task(){};
 
     public int getId() {
@@ -109,5 +112,13 @@ public class Task {
 
     public void setAddedByMe(boolean addedByMe) {
         this.addedByMe = addedByMe;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
     }
 }

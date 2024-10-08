@@ -9,7 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
     <!-- ======= Styles ====== -->
     <style>
 
@@ -881,82 +892,21 @@
                      alt="">
             </div>
         </div>
+        <div style="display:flex;flex-direction: column;justify-content: center;width: 100%;margin-top: 8rem;align-items: center">
 
-        <!-- ======================= Cards ================== -->
-        <div class="cardBox">
-            <div class="card">
-                <div>
-                    <div class="numbers"><%out.println(request.getAttribute("size"));%></div>
-                    <div class="clipboard-outline">Tasks</div>
-                </div>
+            <h1 style="margin-bottom: 1rem">Send message to the manager for Task : <%out.println(request.getAttribute("task"));%></h1>
+            <form action="request" method="post" style="width: 30rem">
 
-                <div class="iconBx">
-                    <ion-icon name="clipboard-outline"></ion-icon>
-                </div>
-            </div>
-        </div>
-        <div style="display: flex ; justify-content: flex-end;margin-right: 3rem">
-            <form action="dashboard/addTask" method="get">
-                <button type="submit" class="button-3">New Task</button>
+                               <textarea rows="10" id="description" name="message" placeholder="Message ..."
+                                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+          <button style="width: 100%" class="button-3" type="submit">Send</button>
             </form>
+        <%
+        if(request.getAttribute("error")!=null){
+            out.println("<h1 style='color:red ; text-align:center; margin-top:5rem ; font-size: 1rem;'>"+request.getAttribute("error")+"</h1>");
+        }
+        %>
         </div>
-        <div class="details">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>My tasks</h2>
-                    <a href="#" class="btn">View All</a>
-                </div>
-                <div style='overflow-x: auto; max-width: 100%;'>
-                    <table>
-                        <thead>
-                        <tr>
-                            <td style="text-align: center">Title</td>
-                            <td style="text-align: center">Description</td>
-                            <td style="text-align: center">Status</td>
-                            <td style="text-align: center">Start Date</td>
-                            <td style="text-align: center">End Date</td>
-                            <td style="text-align: center">Edit Status</td>
-                            <td style="text-align: center">Action</td>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%
-                            List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-                            for (Task task : tasks) {
-                                out.println("<tr>");
-                                out.println("<td style='text-align:center'>" + task.getName() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
-                                if (task.getStatus().equals("In Progress")) {
-                                    out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
-                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
-                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
-                                    out.println("</dev></td>");
-                                } else {
-                                    out.println("<td>Task " + task.getStatus() + "</td>\n");
-                                }
-                                out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
-                                if (task.isAddedByMe()) {
-                                    out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                } else {
-                                    out.println("<form action='request' method='get'><input type='hidden' name='task_id' value="+task.getId()+"><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
-                                }
-                                out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
-                                out.println("<div></td>");
-                                out.println("</tr>");
-                            }
-                        %>
-                        </tbody>
-
-
-                    </table>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -985,13 +935,6 @@
     };
 
 </script>
-<%
-    if (request.getSession().getAttribute("insufficient_token") != null) {
-        out.println("<script>alert('" + request.getSession().getAttribute("insufficient_token") + "');</script>");
-        request.getSession().removeAttribute("insufficient_delete_token");
-    }
-%>
-
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
