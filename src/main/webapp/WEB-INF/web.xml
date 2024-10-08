@@ -101,5 +101,15 @@
         <url-pattern>/dashboard/delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RequestServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.RequestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RequestServlet</servlet-name>
+        <url-pattern>/request</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
