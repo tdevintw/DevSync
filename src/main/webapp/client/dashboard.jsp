@@ -938,7 +938,7 @@
                                 } else {
                                     out.println("<td>Task " + task.getStatus() + "</td>\n");
                                 }
-                                out.println("<td><div style='display:flex;gap:5px;'>" +
+                                out.println("<td><div style='display:flex;gap:5px;justify-content:center'>" +
                                         "<button style='background-color:gray' class='button-3'>Replace</button>");
                                 if (task.isAddedByMe()) {
                                     out.println("<button style='background-color:green' class='button-3'>Edit</button>");
