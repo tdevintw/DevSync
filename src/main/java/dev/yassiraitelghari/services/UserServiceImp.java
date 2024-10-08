@@ -37,5 +37,14 @@ public class UserServiceImp implements UserService{
     public User findById(int id){
         return userRepository.findById(id);
     }
+    @Override
+    public boolean updateReplaceToken(){
+        return userRepository.updateReplaceToken();
+    }
+
+    @Override
+    public boolean updateDeleteToken(){
+        return userRepository.updateDeleteToken();
+    }
 
 }
