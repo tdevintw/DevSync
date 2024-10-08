@@ -894,7 +894,7 @@
         </div>
         <div style="display:flex;flex-direction: column;justify-content: center;width: 100%;margin-top: 8rem;align-items: center">
 
-            <h1 style="margin-bottom: 1rem">Send message to the manager for Task <%out.println(request.getAttribute("task"));%></h1>
+            <h1 style="margin-bottom: 1rem">Send message to the manager for Task : <%out.println(request.getAttribute("task"));%></h1>
             <form action="request" method="post" style="width: 30rem">
 
                                <textarea rows="10" id="description" name="message" placeholder="Message ..."
@@ -903,7 +903,7 @@
             </form>
         <%
         if(request.getAttribute("error")!=null){
-            out.println("<h1 style='color:red ; text-align:center; margin-top:5rem ; font-size: 2rem;'>"+request.getAttribute("error")+"</h1>");
+            out.println("<h1 style='color:red ; text-align:center; margin-top:5rem ; font-size: 1rem;'>"+request.getAttribute("error")+"</h1>");
         }
         %>
         </div>
