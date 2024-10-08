@@ -938,14 +938,13 @@
                                 } else {
                                     out.println("<td>Task " + task.getStatus() + "</td>\n");
                                 }
-
+                                out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
                                 if (task.isAddedByMe()) {
                                     out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                }else{
-                                    out.println("<td><div style='display:flex;gap:5px;justify-content:center'>" +
-                                            "<button style='background-color:gray' class='button-3'>Replace</button>");
+                                } else {
+                                    out.println("<button style='background-color:gray' class='button-3'>Replace</button>");
                                 }
-                                out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value="+task.getId()+"><button type='submit' class='button-4'>Delete</button></form>");
+                                out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
                                 out.println("<div></td>");
                                 out.println("</tr>");
                             }
@@ -986,7 +985,12 @@
     };
 
 </script>
-
+<%
+    if (request.getSession().getAttribute("insufficient_delete_token") != null) {
+        out.println("<script>alert('" + request.getSession().getAttribute("insufficient_delete_token") + "');</script>");
+        request.getSession().removeAttribute("insufficient_delete_token");
+    }
+%>
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -56,6 +56,8 @@ public class UserRepositoryImp implements UserRepository {
                 updatedUser.setName(user.getName());
                 updatedUser.setLastName(user.getLastName());
                 updatedUser.setPassword(user.getPassword());
+                updatedUser.setDeleteJeton(user.getDeleteJeton());
+                updatedUser.setReplaceJeton(user.getReplaceJeton());
                 entityManager.merge(updatedUser);
             }
             entityManager.getTransaction().commit();
