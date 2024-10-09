@@ -111,5 +111,23 @@
         <url-pattern>/request</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RequestsServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.RequestsServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>RequestsServlet</servlet-name>
+        <url-pattern>/requests</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReqAssignTaskServletuestsServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.AssignTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AssignTaskServlet</servlet-name>
+        <url-pattern>/assignToUser</url-pattern>
+    </servlet-mapping>
 </web-app>

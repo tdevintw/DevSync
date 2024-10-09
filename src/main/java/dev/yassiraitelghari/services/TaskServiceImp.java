@@ -54,6 +54,4 @@ public class TaskServiceImp implements TaskService{
     public boolean updateTasks(int user_id){
        return taskRepository.updateTasks(user_id);
     }
-
-
 }

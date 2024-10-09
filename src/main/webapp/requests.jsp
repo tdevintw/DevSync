@@ -1,5 +1,5 @@
-<%@ page import="dev.yassiraitelghari.domain.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="dev.yassiraitelghari.domain.Request" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -284,9 +284,9 @@
         }
 
         .details .recentOrders {
+            margin-top: 5rem;
             position: relative;
             display: grid;
-            min-height: 500px;
             background: var(--white);
             padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -392,7 +392,6 @@
         .recentCustomers {
             position: relative;
             display: grid;
-            min-height: 500px;
             padding: 20px;
             background: var(--white);
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -541,6 +540,7 @@
                 </a>
             </li>
 
+
             <li>
                 <a href="requests">
                         <span class="icon">
@@ -558,7 +558,6 @@
                     <span class="title">Customers</span>
                 </a>
             </li>
-
             <li>
                 <a href="#">
                         <span class="icon">
@@ -615,70 +614,34 @@
             </div>
         </div>
 
-        <!-- ======================= Cards ================== -->
-        <div class="cardBox">
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <% out.println((int) request.getAttribute("size"));%>
-                    </div>
-                    <div class="cardName">Users</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="people-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">80</div>
-                    <div class="clipboard-outline">Tasks</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="clipboard-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">284</div>
-                    <div class="cardName">Tags</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="pricetag-outline"></ion-icon>
-                </div>
-            </div>
-
-        </div>
 
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Recent Orders</h2>
+                    <h2>Requests</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
 
                 <table>
                     <thead>
                     <tr>
-                        <td>Email</td>
                         <td>Username</td>
-                        <td>Role</td>
-                        <td>Add Tasks</td>
+                        <td>Task</td>
+                        <td>Message</td>
+                        <td>Status</td>
+                        <td>Action</td>
                     </tr>
                     </thead>
                     <tbody>
                     <%
-                        List<User> users = (List<User>) request.getAttribute("users");
-                        for (User user : users) {
+                        List<Request> requests = (List<Request>) request.getAttribute("requests");
+                        for (Request requestGet : requests) {
                             out.println("<tr>");
-                            out.println("<td>" + user.getEmail() + "</td>");
-                            out.println("<td>" + user.getUsername() + "</td>");
-                            out.println("<td>" + user.getRole() + "</td>");
-                            out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
+                            out.println("<td>" + requestGet.getTask().getUser().getUsername()+ "</td>");
+                            out.println("<td>" + requestGet.getTask().getName() + "</td>");
+                            out.println("<td>" + requestGet.getMessage() + "</td>");
+                            out.println("<td>" + requestGet.getStatus() + "</td>");
+                            out.println("<td><form action='assignToUser' method='get'><input type='hidden' name='old_user_id' value="+requestGet.getTask().getUser().getId()+"><input type='hidden' name='task_id' value="+requestGet.getTask().getId()+"><button type='submit' class='button-3'>Assign To User</button></form></td>");
                             out.println("</tr>");
                         }
                     %>

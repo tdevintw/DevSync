@@ -15,7 +15,7 @@ public class JetonScheduler {
         userService.updateDeleteToken();
     }
 
-    @Schedule(hour = "0", minute = "0" ,persistent = true)
+    @Schedule(hour = "0", minute = "0", persistent = true)
     public void addDailyJeton() {
         userService.updateReplaceToken();
     }

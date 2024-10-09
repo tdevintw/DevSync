@@ -667,7 +667,7 @@
                         <td>Email</td>
                         <td>Username</td>
                         <td>Role</td>
-                        <td>Add Tasks</td>
+                        <td>Action</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -678,7 +678,7 @@
                             out.println("<td>" + user.getEmail() + "</td>");
                             out.println("<td>" + user.getUsername() + "</td>");
                             out.println("<td>" + user.getRole() + "</td>");
-                            out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
+                            out.println("<td><form action='assignToUser' method='post'><input type='hidden' name='user_id' value="+user.getId()+"><button type='submit' class='button-3'>Assign</button></form></td>");
                             out.println("</tr>");
                         }
                     %>
