@@ -10,4 +10,11 @@ public interface RequestService {
     List<Request> getAll();
 
     Request get(int requestId);
+
+    Request update(Request request);
+
+    List<Request> pendingRequests();
+
+    List<Request> updateRequestsStatusToNotResponded(List<Request> requests);
+
 }

@@ -47,4 +47,9 @@ public class UserServiceImp implements UserService{
         return userRepository.updateDeleteToken();
     }
 
+    @Override
+    public List<User> addExtraToken(){
+        return userRepository.addExtraToken();
+    }
+
 }

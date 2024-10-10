@@ -11,6 +11,8 @@ public interface RequestRepository{
 
     Request get(int requestId);
 
+    Request update(Request request);
 
+    List<Request> pendingRequests();
 
 }
