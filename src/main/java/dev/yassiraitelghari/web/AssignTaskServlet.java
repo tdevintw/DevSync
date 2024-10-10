@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AssignTaskServlet")
 public class AssignTaskServlet extends HttpServlet {
@@ -21,11 +22,13 @@ public class AssignTaskServlet extends HttpServlet {
     @Override
     protected  void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         if(((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
-            request.setAttribute("users",userService.getAll());
             int taskId = Integer.parseInt(request.getParameter("task_id"));
             int oldUserId = Integer.parseInt(request.getParameter("old_user_id"));
             Task task = taskService.findTask(taskId);
             User oldUser = userService.findById(oldUserId);
+            List<User> filteredUsers = userService.getAll().stream().filter(user -> user.getRole().equals("CLIENT")).filter(user -> !user.getUsername().equals(oldUser.getUsername())).toList();
+            request.setAttribute("users",filteredUsers);
+
             if(task!=null &&oldUser != null){
                 taskToAssign = task;
                 this.oldUser = oldUser;
@@ -47,11 +50,13 @@ public class AssignTaskServlet extends HttpServlet {
         }else{
             Task task = this.taskToAssign;
             task.setUser(newUser);
+            task.setIsReplaced(true);
             taskService.update(task);
             newUser.getTasks().add(task);
             User oldUser = this.oldUser;
             userService.update(newUser);
             oldUser.getTasks().remove(task);
+            oldUser.setReplaceJeton(oldUser.getReplaceJeton()-1);
             userService.update(oldUser);
         }
         response.sendRedirect("dashboard");

@@ -853,7 +853,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -886,7 +886,11 @@
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers"><%out.println(request.getAttribute("size"));%></div>
+                    <div class="numbers">
+                        <%
+                            int size = (int)request.getAttribute("size");
+                            out.println(size);%>
+                    </div>
                     <div class="clipboard-outline">Tasks</div>
                 </div>
 
@@ -923,36 +927,44 @@
                         <tbody>
                         <%
                             List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-                            for (Task task : tasks) {
-                                out.println("<tr>");
-                                out.println("<td style='text-align:center'>" + task.getName() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
-                                out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
-                                if (task.getStatus().equals("In Progress")) {
-                                    out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
-                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
-                                    out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
-                                    out.println("</dev></td>");
-                                } else {
-                                    out.println("<td>Task " + task.getStatus() + "</td>\n");
+                            if(tasks!=null && !tasks.isEmpty()) {
+
+                                for (Task task : tasks) {
+                                    out.println("<tr>");
+                                    out.println("<td style='text-align:center'>" + task.getName() + "</td>");
+                                    out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
+                                    out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
+                                    out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
+                                    out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
+                                    if (task.getStatus().equals("In Progress")) {
+                                        out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
+                                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
+                                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
+                                        out.println("</dev></td>");
+                                    } else {
+                                        out.println("<td>Task " + task.getStatus() + "</td>\n");
+                                    }
+                                    out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
+                                    if (task.isAddedByMe()) {
+                                        out.println("<button style='background-color:green' class='button-3'>Edit</button>");
+                                    } else if (!task.getIsReplaced() && task.getRequest() == null) {
+                                        out.println("<form action='request' method='get'><input type='hidden' name='task_id' value=" + task.getId() + "><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
+                                    } else if (task.getRequest() != null) {
+                                        out.println("<button  style='background-color:gray' class='button-3'>Request Sent</button>");
+                                    }
+                                    out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
+                                    out.println("<div></td>");
+                                    out.println("</tr>");
                                 }
-                                out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
-                                if (task.isAddedByMe()) {
-                                    out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                } else {
-                                    out.println("<form action='request' method='get'><input type='hidden' name='task_id' value="+task.getId()+"><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
-                                }
-                                out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
-                                out.println("<div></td>");
-                                out.println("</tr>");
                             }
                         %>
                         </tbody>
 
 
                     </table>
+                    <%if(size==0){%>
+                    <h1 style="align-items: center">There is no Tasks </h1>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -987,8 +999,9 @@
 </script>
 <%
     if (request.getSession().getAttribute("insufficient_token") != null) {
-        out.println("<script>alert('" + request.getSession().getAttribute("insufficient_token") + "');</script>");
-        request.getSession().removeAttribute("insufficient_delete_token");
+        String alert = (String)request.getSession().getAttribute("insufficient_token");
+        request.getSession().removeAttribute("insufficient_token");
+        out.println("<script>alert('" +alert+ "');</script>");
     }
 %>
 

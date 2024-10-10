@@ -40,6 +40,9 @@ public class Task {
     @OneToOne(mappedBy = "task")
     private  Request request;
 
+    @Column(name = "is_replaced")
+    private boolean isReplaced;
+
     public Task(){};
 
     public int getId() {
@@ -120,5 +123,13 @@ public class Task {
 
     public void setRequest(Request request) {
         this.request = request;
+    }
+
+    public boolean getIsReplaced() {
+        return isReplaced;
+    }
+
+    public void setIsReplaced(boolean isReplaced) {
+        this.isReplaced = isReplaced;
     }
 }

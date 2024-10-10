@@ -58,6 +58,7 @@ public class UserRepositoryImp implements UserRepository {
                 updatedUser.setPassword(user.getPassword());
                 updatedUser.setDeleteJeton(user.getDeleteJeton());
                 updatedUser.setReplaceJeton(user.getReplaceJeton());
+                updatedUser.setTasks(user.getTasks());
                 entityManager.merge(updatedUser);
             }
             entityManager.getTransaction().commit();

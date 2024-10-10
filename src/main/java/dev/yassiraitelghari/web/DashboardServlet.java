@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
@@ -30,20 +31,24 @@ public class DashboardServlet extends HttpServlet {
             if (user.getRole().equals("MANAGER")) {
                 List<User> users = userService.getAll();
                 request.setAttribute("users", users);
-                request.setAttribute("size", users.size());
+                int size = users.size() >0 ? users.size() : 0;
+                request.setAttribute("size", size);
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             } else if (user.getRole().equals("CLIENT")) {
                 List<Task> tasks = null;
+                int size = 0;
                 if(taskService.updateTasks(user.getId())){
+                    //update task to set status of expired tasks to expired and ont fetch them
                     tasks = taskService.findTasks(user.getId());
+                    if(tasks!=null){
+                        size = tasks.size();
+                    }
                 }
                 request.setAttribute("tasks", tasks);
-                request.setAttribute("size", tasks.size());
+                request.setAttribute("size", size);
                 request.getRequestDispatcher("client/dashboard.jsp").forward(request, response);
             }
-
         }
-
         response.sendRedirect("profile");
 
     }

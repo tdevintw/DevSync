@@ -54,6 +54,7 @@ public class RequestServlet extends HttpServlet {
             user.setReplaceJeton(user.getReplaceJeton()-1);
             userService.update(user);
         }
+        request.removeAttribute("insufficient_token");
         response.sendRedirect("dashboard");
     }
 }

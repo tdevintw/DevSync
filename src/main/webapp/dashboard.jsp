@@ -587,7 +587,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -657,7 +657,7 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Recent Orders</h2>
+                    <h2>Assign Tasks</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
 
