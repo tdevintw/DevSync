@@ -31,7 +31,7 @@ public class Task {
     @Column(name = "date_limit")
     private LocalDateTime dateLimit;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL)
     private List<Tag> tags;
 
     @Column(name ="added_by_me")

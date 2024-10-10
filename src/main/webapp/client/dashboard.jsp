@@ -947,9 +947,9 @@
                                     out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
                                     if (task.isAddedByMe()) {
                                         out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                    } else if (!task.getIsReplaced() && task.getRequest() == null) {
+                                    } else if (!task.getIsReplaced() && task.getRequest() == null &&task.getStatus().equals("In Progress")) {
                                         out.println("<form action='request' method='get'><input type='hidden' name='task_id' value=" + task.getId() + "><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
-                                    } else if (task.getRequest() != null) {
+                                    } else if (!task.getIsReplaced() && task.getRequest() != null) {
                                         out.println("<button  style='background-color:gray' class='button-3'>Request Sent</button>");
                                     }
                                     out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
@@ -963,7 +963,7 @@
 
                     </table>
                     <%if(size==0){%>
-                    <h1 style="align-items: center">There is no Tasks </h1>
+                    <h1 style="text-align: center">There is no Tasks </h1>
                     <%}%>
                 </div>
             </div>
