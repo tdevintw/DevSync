@@ -122,7 +122,7 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ReqAssignTaskServletuestsServlet</servlet-name>
+        <servlet-name>AssignTaskServlet</servlet-name>
         <servlet-class>dev.yassiraitelghari.web.AssignTaskServlet</servlet-class>
     </servlet>
 

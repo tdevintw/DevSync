@@ -22,8 +22,8 @@ public class AssignTaskServlet extends HttpServlet {
     protected  void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         if(((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
             request.setAttribute("users",userService.getAll());
-            int taskId = Integer.parseInt((String)request.getAttribute("task_id"));
-            int oldUserId = Integer.parseInt((String)request.getAttribute("old_user_id"));
+            int taskId = Integer.parseInt(request.getParameter("task_id"));
+            int oldUserId = Integer.parseInt(request.getParameter("old_user_id"));
             Task task = taskService.findTask(taskId);
             User oldUser = userService.findById(oldUserId);
             if(task!=null &&oldUser != null){
@@ -40,7 +40,7 @@ public class AssignTaskServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request , HttpServletResponse response) throws IOException {
-        int userId = Integer.parseInt((String)request.getAttribute("user_id"));
+        int userId = Integer.parseInt(request.getParameter("user_id"));
          User newUser = userService.findById(userId);
         if(newUser==null || this.oldUser==null){
             response.sendRedirect("requests");
