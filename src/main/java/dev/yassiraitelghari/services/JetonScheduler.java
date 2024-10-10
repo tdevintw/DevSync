@@ -26,7 +26,7 @@ public class JetonScheduler {
     }
 
 
-    @Schedule(hour = "6", minute = "0", persistent = true)
+    @Schedule(hour = "*", minute = "*", persistent = true)
     public void extraJetons() {
         List<Request> requests = requestService.pendingRequests();
         List<User> usersToAddJetons = requests.stream().map(request -> request.getTask().getUser()).distinct().toList();

@@ -13,7 +13,8 @@ public class Request {
     @Column(name = "message")
     private String message;
     @JoinColumn(name = "task_id" , nullable = false)
-    @OneToOne
+    @JoinColumn(name = "task_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Task task;
     @Column(name = "status")
     private String status;

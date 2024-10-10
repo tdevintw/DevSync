@@ -21,7 +21,6 @@ public interface UserService {
 
     boolean updateDeleteToken();
 
-    List<User> addExtraToken();
 
 
 }

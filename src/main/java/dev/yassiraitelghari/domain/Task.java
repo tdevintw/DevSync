@@ -37,7 +37,7 @@ public class Task {
     @Column(name ="added_by_me")
     private boolean addedByMe ;
 
-    @OneToOne(mappedBy = "task")
+    @OneToOne(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private  Request request;
 
     @Column(name = "is_replaced")
