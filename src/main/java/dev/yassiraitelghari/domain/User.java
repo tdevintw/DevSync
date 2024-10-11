@@ -41,7 +41,7 @@
 
 
 
-        public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton, boolean addExtra) {
+        public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.id = id;
             this.username = username;
             this.name = name;
@@ -54,7 +54,7 @@
             this.deleteJeton = deleteJeton;
         }
 
-        public User(String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton, boolean addExtra) {
+        public User(String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.username = username;
             this.name = name;
             this.lastName = lastName;
