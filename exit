@@ -1,0 +1,227 @@
+[33mcommit d5a36a3e7d520cc9d89d7c37e918330ffac4612d[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;32mR3[m[33m)[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 11 10:07:49 2024 +0100
+
+    fixing one then more row with the indetifier was found  hibernate exception and adding extra 4 token to users if tehir rquests were pending for more then 12 hours
+
+[33mcommit 760322c1583ed3db42728537f8f5f89f25effc6a[m[33m ([m[1;31morigin/dev[m[33m, [m[1;31morigin/R3[m[33m)[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 11 09:44:23 2024 +0100
+
+    pushing lastest updates
+
+[33mcommit c9e897adfcb3896cd54434d6c2849ad665fb7811[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 10 22:56:04 2024 +0100
+
+    working on fixing uservreplace jeton logic
+
+[33mcommit e5b584d37363acd5b6e6596ef0c46db30438811c[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 10 17:32:35 2024 +0100
+
+    im)plement the code of giving the users 4 tokens if their requests passed 12 hours without respond from the manager
+
+[33mcommit 7ad9fc17fb46cd882690584d5ca23f67402f20e5[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 10 13:14:38 2024 +0100
+
+    working on the logic of assigning tasks
+
+[33mcommit 1c3787d6797859d04902cf7e0e66ba3c7280e751[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 10 11:20:37 2024 +0100
+
+    fixing pop showing when delete and replace token are insuffucient , plus working on the logic of changing tasks users based on requests
+
+[33mcommit 7522dc44229fb1f3e14b18d7bee65ebc685e1d07[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 10 09:30:48 2024 +0100
+
+    fixing request get param
+
+[33mcommit 7397eeb863a2e454f1ca8de989597c7151d9a376[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Wed Oct 9 22:02:56 2024 +0100
+
+    create the front to replace the task for a user and coding the backendn
+
+[33mcommit 8b700aa706bdfe9d247134d38e5b131d563e89fc[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 22:10:01 2024 +0100
+
+    fix error font size
+
+[33mcommit cd1cbc2984fc77cd456c410ac1a58f6981cc04d1[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 22:07:03 2024 +0100
+
+    check if client has suffucient replace tokens
+
+[33mcommit 034956f71cda380dd442a537a9dab24fe0f6ce85[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 21:54:30 2024 +0100
+
+    addign the request class and implementing the cret eof the task within a specific range of time
+
+[33mcommit 0e9c1d13ab6b4ffe84b423b1364da407a1b2d218[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 15:04:11 2024 +0100
+
+    enable the client to delete a task assigned by the manager in case he has the token
+
+[33mcommit 640ef029c5a9e2a86de4bf6df55a781876222d20[m[33m ([m[1;31morigin/R2[m[33m, [m[1;32mR2[m[33m)[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 13:15:30 2024 +0100
+
+    set count of delete to 0 whne the client user it
+
+[33mcommit 67055ae844fd39f94b14f6bd4e3ccf676df69502[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 12:43:00 2024 +0100
+
+    implementing tokens and Scedule class to ensure that a user will have 2 token for each day and 1 delete token for each month
+
+[33mcommit b8f6ac120cc1de262eb8ccbdc72893fa6721eeb7[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 10:25:28 2024 +0100
+
+    update tasks status to expired if date limit pass current date plus fixing styling of acvtion buttons
+
+[33mcommit 3b944f42673c9ded63d6a3a500f393ebb1c7bc61[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 09:40:33 2024 +0100
+
+    adding the sql script of the database
+
+[33mcommit bde916d567c2fe5d155f5cf96d83ea9b3925a882[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 8 09:30:01 2024 +0100
+
+    implemente delete on tasks
+
+[33mcommit 971522bd2b529b93f947c1b58f6aacd8185b75d3[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Mon Oct 7 21:48:38 2024 +0100
+
+    add delete and update serveelts plus working in front for client tasks
+
+[33mcommit d8d8ab6b3f340a498d499c56cfe90c81d4c7aff0[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Mon Oct 7 17:06:18 2024 +0100
+
+    clients can assign to themselves personal tasks
+
+[33mcommit 9a702200631e0b4e9b96abd5d6260d40ab863e05[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Mon Oct 7 16:32:30 2024 +0100
+
+    enable client to see all their tasks plis editing the status
+
+[33mcommit e62e90ecc4a5873e24dd309eecdbe1c7f9be2ee0[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Sun Oct 6 19:42:09 2024 +0100
+
+    isnert task and tags, plus ensuring that a task date range cant be greater then the next 3 days
+
+[33mcommit 812ea83274a68d0c139618d2228764932d430614[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Sun Oct 6 19:39:47 2024 +0100
+
+    isnert task and tags, plus ensuring that a task date range cant be greater then the next 3 days
+
+[33mcommit 251e4dc16cf118a5776989895569777ce6e49365[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Sun Oct 6 17:52:32 2024 +0100
+
+    handling validation of tags and getting tags from the browser to the sevrelets
+
+[33mcommit 3d582c3e4dbda8246438cbf9d35f055247077734[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Sun Oct 6 16:34:34 2024 +0100
+
+    working on adding tags to a specific task
+
+[33mcommit f3fc90b2722a92e9a74e1aaa8f2382f3b05c2d3d[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Sat Oct 5 13:11:50 2024 +0100
+
+    fixing end date validation to be greater then start date
+
+[33mcommit b95b67355625228ed637d31a6a2667072aba3557[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 4 16:58:52 2024 +0100
+
+    add the create feature for the task entity
+
+[33mcommit bf6a311dd1ea1d2c8a58801d441f197875090057[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 4 16:39:25 2024 +0100
+
+    establishing backend validation
+
+[33mcommit 1da263a750da1e9cb36802082a94d310d42822cd[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 4 11:17:36 2024 +0100
+
+    initilization of the form to send data to the servelet of add Tasks
+
+[33mcommit 33a9da0e614402c41ebec71a2c1409f1240ac5fc[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Fri Oct 4 10:32:31 2024 +0100
+
+    addign the laoyut of addign a task to a user
+
+[33mcommit 187a76825ca29be9848a50208c6ca053d03dfc73[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 3 21:56:37 2024 +0100
+
+    fixing users showing errors
+
+[33mcommit be4c1ca03384957d0a75a3bdb338fc13e2f745a3[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 3 20:29:18 2024 +0100
+
+    adding the layout of the dashboard
+
+[33mcommit 1a83577effac960757f0db3243d716291b8cff64[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 3 17:45:01 2024 +0100
+
+    adding task and tag entities plus adding the logout feature , working on securing the paths such as dashboard for nonon auth users and for client users
+
+[33mcommit 9e26ff301e3da97c355454dbdb591c4500c20e60[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 3 17:09:06 2024 +0100
+
+    working on the version 2 of the DevSync project
+
+[33mcommit a62c908274a9f8c43d2a91705a25c7442553023a[m[33m ([m[1;31morigin/R1[m[33m, [m[1;32mmain[m[33m, [m[1;32mR1[m[33m)[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Thu Oct 3 10:19:29 2024 +0100
+
+    finalizing version 1 of the project
+
+[33mcommit 49f77dba9eaea80877a64dd872153682b28a24f6[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Wed Oct 2 17:36:53 2024 +0100
+
+    changing from working with hibernate only to working with jpa as abstarction and hibernate
+
+[33mcommit ed2962c827786bc1a217704024b189b1b76dd90d[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Wed Oct 2 10:31:11 2024 +0100
+
+    fixing ma,agement of roles and sessions
+
+[33mcommit 5d2531adcdc15295685465fd4e86762fe74dad51[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Wed Oct 2 10:17:24 2024 +0100
+
+    implmenting the delete and update and managing roles
+
+[33mcommit 442c2dfebc3550ad9eebd0330a678519d2a78278[m
+Author: Yasser <aitelghariyasser@gmail.com>
+Date:   Tue Oct 1 22:10:01 2024 +0100
+
+    cer
