@@ -17,4 +17,6 @@ public interface RequestService {
 
     List<Request> updateRequestsStatusToNotResponded(List<Request> requests);
 
+    List<Request> RequestWithToken();
+
 }

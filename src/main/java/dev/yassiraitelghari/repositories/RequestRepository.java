@@ -15,4 +15,6 @@ public interface RequestRepository{
 
     List<Request> pendingRequests();
 
+    List<Request> RequestWithToken();
+
 }

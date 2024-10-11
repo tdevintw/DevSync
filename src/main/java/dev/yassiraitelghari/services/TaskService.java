@@ -30,4 +30,5 @@ public interface TaskService {
 
     List<Task> getAll();
 
+    boolean isTaskWithTag(Task task , String tag);
 }

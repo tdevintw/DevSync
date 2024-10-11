@@ -286,7 +286,6 @@
         .details .recentOrders {
             position: relative;
             display: grid;
-            min-height: 500px;
             background: var(--white);
             padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -339,6 +338,7 @@
 
         .details .recentOrders table tr td {
             padding: 10px;
+            text-align: center;
         }
 
         .details .recentOrders table tr td:last-child {
@@ -551,9 +551,9 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="tasks">
                         <span class="icon">
-                            <ion-icon name="task-outline"></ion-icon>
+                            <ion-icon name="clipboard-outline"></ion-icon>
                         </span>
                     <span class="title">Tasks</span>
                 </a>
@@ -604,10 +604,23 @@
             </div>
 
             <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <form action="tasks" method="post" style="display: flex; align-items: center;">
+                    <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Enter Tag here..."
+                            name="tag"
+                            style="padding: 10px; margin-right: 10px;border-radius: 10px"
+
+                    >
+                    <button
+                            type="submit"
+                            style="padding: 10px 20px;background-color: #2a2185 ; color:white;"
+
+                    >
+                        Search
+                    </button>
+                </form>
             </div>
 
             <div class="user">

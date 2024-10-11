@@ -286,7 +286,6 @@
         .details .recentOrders {
             position: relative;
             display: grid;
-            min-height: 500px;
             background: var(--white);
             padding: 20px;
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -339,6 +338,7 @@
 
         .details .recentOrders table tr td {
             padding: 10px;
+            text-align: center;
         }
 
         .details .recentOrders table tr td:last-child {
@@ -551,9 +551,9 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="tasks">
                         <span class="icon">
-                            <ion-icon name="task-outline"></ion-icon>
+                            <ion-icon name="clipboard-outline"></ion-icon>
                         </span>
                     <span class="title">Tasks</span>
                 </a>
@@ -643,12 +643,14 @@
 
             <div class="card">
                 <div>
-                    <div class="numbers">284</div>
-                    <div class="cardName">Tags</div>
+                    <div class="numbers">
+                        <% out.println((int) request.getAttribute("token_size"));%>
+                    </div>
+                    <div class="cardName">Tokens</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="pricetag-outline"></ion-icon>
+                    <ion-icon name="wallet-outline"></ion-icon>
                 </div>
             </div>
 
