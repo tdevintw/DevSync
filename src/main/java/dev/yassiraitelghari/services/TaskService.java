@@ -28,4 +28,6 @@ public interface TaskService {
 
     boolean updateTasks(int user_id);
 
+    List<Task> getAll();
+
 }

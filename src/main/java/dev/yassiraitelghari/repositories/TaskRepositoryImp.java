@@ -142,5 +142,25 @@ public class TaskRepositoryImp implements TaskRepository {
         }
         return true;
     }
+
+    @Override
+    public List<Task> getAll(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Task> tasks = null;
+        try{
+            entityManager.getTransaction().begin();
+            TypedQuery<Task> query = entityManager.createQuery("FROM Task", Task.class);
+            tasks = query.getResultList();
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            if(entityManager.getTransaction().isActive()){
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return tasks;
+    }
 }
 

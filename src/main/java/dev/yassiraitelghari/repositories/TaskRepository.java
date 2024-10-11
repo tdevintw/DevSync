@@ -18,4 +18,5 @@ public interface TaskRepository {
 
     boolean updateTasks(int user_id);
 
+    List<Task> getAll();
 }
