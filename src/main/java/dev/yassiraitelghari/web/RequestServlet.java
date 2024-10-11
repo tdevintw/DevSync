@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "RequestServlet")
 
@@ -49,8 +51,13 @@ public class RequestServlet extends HttpServlet {
             newRequest.setMessage(request.getParameter("message"));
             newRequest.setStatus("Pending");
             newRequest.setTask(taskOfRequest);
-            requestServiece.add(newRequest);
+            Task task = taskOfRequest;
+            task.setRequest(requestServiece.add(newRequest));
+            taskService.update(task);
             User user =(User)request.getSession().getAttribute("user");
+            List<Task> newList = user.getTasks().stream().filter(task1 -> task1.getId()!=task.getId()).collect(Collectors.toList());
+            newList.add(task);
+            user.setTasks(newList);
             user.setReplaceJeton(user.getReplaceJeton()-1);
             userService.update(user);
         }

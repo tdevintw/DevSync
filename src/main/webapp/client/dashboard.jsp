@@ -950,9 +950,11 @@
                                         out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
                                     }else if(!task.getIsReplaced()){
                                         out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
-                                    }else if (!task.getIsReplaced() && task.getRequest() == null &&task.getStatus().equals("In Progress")) {
+                                    }
+                                    if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() == null &&task.getStatus().equals("In Progress")) {
                                         out.println("<form action='request' method='get'><input type='hidden' name='task_id' value=" + task.getId() + "><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
-                                    } else if (!task.getIsReplaced() && task.getRequest() != null) {
+                                    }
+                                    if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() != null) {
                                         out.println("<button  style='background-color:gray' class='button-3'>Request Sent</button>");
                                     }
                                     out.println("<div></td>");
