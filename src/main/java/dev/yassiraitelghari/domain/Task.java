@@ -31,13 +31,13 @@ public class Task {
     @Column(name = "date_limit")
     private LocalDateTime dateLimit;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tag> tags;
 
     @Column(name ="added_by_me")
     private boolean addedByMe ;
 
-    @OneToOne(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     private  Request request;
 
     @Column(name = "is_replaced")

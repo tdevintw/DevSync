@@ -30,7 +30,7 @@
         @Column(name = "role")
         private String role;
 
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+        @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<Task> tasks;
 
         @Column(name = "replace_jeton")
