@@ -37,7 +37,7 @@ public class Task {
     @Column(name ="added_by_me")
     private boolean addedByMe ;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private  Request request;
 
     @Column(name = "is_replaced")

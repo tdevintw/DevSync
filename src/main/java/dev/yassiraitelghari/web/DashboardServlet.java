@@ -1,11 +1,9 @@
 package dev.yassiraitelghari.web;
 
+import dev.yassiraitelghari.domain.Request;
 import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
-import dev.yassiraitelghari.services.UserService;
-import dev.yassiraitelghari.services.UserServiceImp;
+import dev.yassiraitelghari.services.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +20,7 @@ public class DashboardServlet extends HttpServlet {
 
     private UserService userService = new UserServiceImp();
     private TaskService taskService = new TaskServiceImp();
+    private RequestService requestService = new RequestServiceImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +32,9 @@ public class DashboardServlet extends HttpServlet {
                 request.setAttribute("users", users);
                 int size = users.size() >0 ? users.size() : 0;
                 request.setAttribute("size", size);
+                List<Request> requestsWithToken = requestService.RequestWithToken();
+                int tokenSize = requestsWithToken.isEmpty() ? 0  :  requestsWithToken.size() ;
+                request.setAttribute("token_size" ,tokenSize);
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             } else if (user.getRole().equals("CLIENT")) {
                 List<Task> tasks = null;
@@ -46,6 +48,7 @@ public class DashboardServlet extends HttpServlet {
                 }
                 request.setAttribute("tasks", tasks);
                 request.setAttribute("size", size);
+
                 request.getRequestDispatcher("client/dashboard.jsp").forward(request, response);
             }
         }

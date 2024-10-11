@@ -130,4 +130,14 @@
         <servlet-name>AssignTaskServlet</servlet-name>
         <url-pattern>/assignToUser</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TasksServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.TasksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TasksServlet</servlet-name>
+        <url-pattern>/tasks</url-pattern>
+    </servlet-mapping>
 </web-app>

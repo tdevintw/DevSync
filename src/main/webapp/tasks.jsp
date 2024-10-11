@@ -1,4 +1,4 @@
-<%@ page import="dev.yassiraitelghari.domain.User" %>
+<%@ page import="dev.yassiraitelghari.domain.Task" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -604,10 +604,23 @@
             </div>
 
             <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <form action="tasks" method="post" style="display: flex; align-items: center;">
+                    <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Enter Tag here..."
+                            name="tag"
+                            style="padding: 10px; margin-right: 10px;border-radius: 10px"
+
+                    >
+                    <button
+                            type="submit"
+                            style="padding: 10px 20px;background-color: #2a2185 ; color:white;"
+
+                    >
+                        Search
+                    </button>
+                </form>
             </div>
 
             <div class="user">
@@ -616,71 +629,42 @@
         </div>
 
         <!-- ======================= Cards ================== -->
-        <div class="cardBox">
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <% out.println((int) request.getAttribute("size"));%>
-                    </div>
-                    <div class="cardName">Users</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="people-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">80</div>
-                    <div class="clipboard-outline">Tasks</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="clipboard-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <% out.println((int) request.getAttribute("token_size"));%>
-                    </div>
-                    <div class="cardName">Tokens</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="wallet-outline"></ion-icon>
-                </div>
-            </div>
-
-        </div>
 
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Assign Tasks</h2>
+                    <h2>Tasks</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
 
                 <table>
                     <thead>
                     <tr>
-                        <td>Email</td>
                         <td>Username</td>
-                        <td>Role</td>
-                        <td>Add Tasks</td>
+                        <td>Title</td>
+                        <td>Description</td>
+                        <td>Status</td>
+                        <td>Start Date</td>
+                        <td>Date limit</td>
+                        <td>Assigned by Manager</td>
+                        <td>Was Replaced</td>
                     </tr>
                     </thead>
                     <tbody>
                     <%
-                        List<User> users = (List<User>) request.getAttribute("users");
-                        for (User user : users) {
+                        List<Task> tasks = (List<Task>) request.getAttribute("tasks");
+                        for (Task task : tasks) {
+                            String byManager= task.isAddedByMe() ? "No" : "Yes";
+                            String replaced = task.getIsReplaced() ? "Yes" : "No";
                             out.println("<tr>");
-                            out.println("<td>" + user.getEmail() + "</td>");
-                            out.println("<td>" + user.getUsername() + "</td>");
-                            out.println("<td>" + user.getRole() + "</td>");
-                            out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
+                            out.println("<td>" + task.getUser().getUsername() + "</td>");
+                            out.println("<td>" + task.getName() + "</td>");
+                            out.println("<td>" + task.getDescription()+ "</td>");
+                            out.println("<td>" + task.getStatus() + "</td>");
+                            out.println("<td>" + task.getStartDate() + "</td>");
+                            out.println("<td>" + task.getDateLimit() + "</td>");
+                            out.println("<td>" + byManager  + "</td>");
+                            out.println("<td>" + replaced + "</td>");
                             out.println("</tr>");
                         }
                     %>

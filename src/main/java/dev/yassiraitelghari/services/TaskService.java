@@ -28,4 +28,7 @@ public interface TaskService {
 
     boolean updateTasks(int user_id);
 
+    List<Task> getAll();
+
+    boolean isTaskWithTag(Task task , String tag);
 }

@@ -112,4 +112,26 @@ public class RequestRepositoryImp implements RequestRepository {
             entityManager.close();
         }
     }
+
+    @Override
+    public List<Request> RequestWithToken() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Request> requests = null;
+        try {
+            entityManager.getTransaction().begin();
+            TypedQuery<Request> query = entityManager.createQuery("FROM Request WHERE status = :status", Request.class);
+            query.setParameter("status", "Accepted");
+            requests = query.getResultList();
+            entityManager.getTransaction().commit();
+            return requests;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return requests;
+    }
 }
