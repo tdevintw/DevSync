@@ -30,7 +30,7 @@
         @Column(name = "role")
         private String role;
 
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+        @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<Task> tasks;
 
         @Column(name = "replace_jeton")
@@ -39,8 +39,6 @@
         @Column(name = "delete_jeton")
         private int deleteJeton;
 
-        @Column(name = "add_extra")
-        private  boolean addExtra;
 
 
         public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton, boolean addExtra) {
@@ -54,7 +52,6 @@
             this.tasks = tasks;
             this.replaceJeton = replaceJeton;
             this.deleteJeton = deleteJeton;
-            this.addExtra = addExtra;
         }
 
         public User(String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton, boolean addExtra) {
@@ -67,7 +64,6 @@
             this.tasks = tasks;
             this.replaceJeton = replaceJeton;
             this.deleteJeton = deleteJeton;
-            this.addExtra = addExtra;
         }
 
         public User() {
@@ -152,13 +148,5 @@
 
         public void setDeleteJeton(int deleteJeton) {
             this.deleteJeton = deleteJeton;
-        }
-
-        public boolean isAddExtra() {
-            return addExtra;
-        }
-
-        public void setAddExtra(boolean addExtra) {
-            this.addExtra = addExtra;
         }
     }
