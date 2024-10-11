@@ -31,14 +31,17 @@ public class Task {
     @Column(name = "date_limit")
     private LocalDateTime dateLimit;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tag> tags;
 
     @Column(name ="added_by_me")
     private boolean addedByMe ;
 
-    @OneToOne(mappedBy = "task")
+    @OneToOne
     private  Request request;
+
+    @Column(name = "is_replaced")
+    private boolean isReplaced;
 
     public Task(){};
 
@@ -120,5 +123,13 @@ public class Task {
 
     public void setRequest(Request request) {
         this.request = request;
+    }
+
+    public boolean getIsReplaced() {
+        return isReplaced;
+    }
+
+    public void setIsReplaced(boolean isReplaced) {
+        this.isReplaced = isReplaced;
     }
 }

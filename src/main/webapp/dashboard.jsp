@@ -542,20 +542,20 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="requests">
                         <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
+                            <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                    <span class="title">Customers</span>
+                    <span class="title">Requests</span>
                 </a>
             </li>
 
             <li>
                 <a href="#">
                         <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
-                    <span class="title">Messages</span>
+                    <span class="title">Customers</span>
                 </a>
             </li>
 
@@ -587,7 +587,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -657,7 +657,7 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Recent Orders</h2>
+                    <h2>Assign Tasks</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
 

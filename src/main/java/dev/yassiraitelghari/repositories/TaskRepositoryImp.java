@@ -59,6 +59,7 @@ public class TaskRepositoryImp implements TaskRepository {
                 updatedTask.setDateLimit(task.getDateLimit());
                 updatedTask.setDescription(task.getDescription());
                 updatedTask.setStatus(task.getStatus());
+                updatedTask.setIsReplaced(task.getIsReplaced());
                 entityManager.merge(updatedTask);
             }
             entityManager.getTransaction().commit();

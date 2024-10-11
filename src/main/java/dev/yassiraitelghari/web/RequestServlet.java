@@ -2,10 +2,8 @@ package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Request;
 import dev.yassiraitelghari.domain.Task;
-import dev.yassiraitelghari.services.RequestService;
-import dev.yassiraitelghari.services.RequestServiceImp;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
+import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.services.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,18 +19,18 @@ public class RequestServlet extends HttpServlet {
     private TaskService taskService = new TaskServiceImp();
     private RequestService requestServiece = new RequestServiceImp();
     private Task taskOfRequest = null;
+    private UserService userService = new UserServiceImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Task task = taskService.findTask(Integer.parseInt(request.getParameter("task_id")));
-        if(task.getUser().getReplaceJeton()<1){
+        if (task.getUser().getReplaceJeton() < 1) {
             request.getSession().setAttribute("insufficient_token", "insufficient Replace Token , wait until next day");
             response.sendRedirect("dashboard");
-        }else{
+        } else {
             taskOfRequest = task;
             request.setAttribute("task", task.getName());
             request.getRequestDispatcher("client/request.jsp").forward(request, response);
         }
-
     }
 
     @Override
@@ -40,19 +38,23 @@ public class RequestServlet extends HttpServlet {
         int currentHour = LocalDateTime.now().getHour();
         int dayOfTheWeel = LocalDateTime.now().getDayOfWeek().getValue();
 
-        if(dayOfTheWeel==6 || dayOfTheWeel ==7){
+        if (dayOfTheWeel == 6 || dayOfTheWeel == 7) {
             request.setAttribute("error", "You cant send requests in weekend");
             request.getRequestDispatcher("client/request.jsp").forward(request, response);
-        }else if(currentHour< 8 || currentHour >=18){
+        } else if (currentHour < 8 || currentHour >= 18) {
             request.setAttribute("error", "You can send requests only within 8AM And 6PM");
             request.getRequestDispatcher("client/request.jsp").forward(request, response);
-        }else{
+        } else {
             Request newRequest = new Request();
             newRequest.setMessage(request.getParameter("message"));
             newRequest.setStatus("Pending");
             newRequest.setTask(taskOfRequest);
             requestServiece.add(newRequest);
+            User user =(User)request.getSession().getAttribute("user");
+            user.setReplaceJeton(user.getReplaceJeton()-1);
+            userService.update(user);
         }
+        request.removeAttribute("insufficient_token");
         response.sendRedirect("dashboard");
     }
 }

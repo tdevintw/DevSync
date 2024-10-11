@@ -12,7 +12,6 @@ public class Request {
     private int id;
     @Column(name = "message")
     private String message;
-    @JoinColumn(name = "task_id" , nullable = false)
     @OneToOne
     private Task task;
     @Column(name = "status")

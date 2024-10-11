@@ -1,5 +1,6 @@
 package dev.yassiraitelghari.repositories;
 
+import dev.yassiraitelghari.domain.Request;
 import dev.yassiraitelghari.domain.User;
 import jakarta.persistence.*;
 import org.hibernate.Session;
@@ -58,9 +59,10 @@ public class UserRepositoryImp implements UserRepository {
                 updatedUser.setPassword(user.getPassword());
                 updatedUser.setDeleteJeton(user.getDeleteJeton());
                 updatedUser.setReplaceJeton(user.getReplaceJeton());
+                updatedUser.setTasks(user.getTasks());
                 entityManager.merge(updatedUser);
+                entityManager.getTransaction().commit();
             }
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
@@ -177,5 +179,7 @@ public class UserRepositoryImp implements UserRepository {
         }
         return true;
     }
+
+
 }
 

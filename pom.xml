@@ -20,7 +20,6 @@
             <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>

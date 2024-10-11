@@ -1,5 +1,5 @@
-<%@ page import="dev.yassiraitelghari.domain.Task" %>
 <%@ page import="java.util.List" %>
+<%@ page import="dev.yassiraitelghari.domain.Request" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,12 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
     <!-- ======= Styles ====== -->
     <style>
-
-
         /* =========== Google Fonts ============ */
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
@@ -288,6 +284,7 @@
         }
 
         .details .recentOrders {
+            margin-top: 5rem;
             position: relative;
             display: grid;
             background: var(--white);
@@ -395,7 +392,6 @@
         .recentCustomers {
             position: relative;
             display: grid;
-            min-height: 500px;
             padding: 20px;
             background: var(--white);
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -518,168 +514,6 @@
             }
         }
 
-        #container #menu-wrap .dots > div {
-            position: relative;
-        }
-
-        #container #menu-wrap .dots > div:after {
-            content: "";
-            position: absolute;
-            bottom: calc((25px / 2) - (6px / 2));
-            left: 0;
-        }
-
-        #container #menu-wrap .dots > div:before {
-            content: "";
-            position: absolute;
-            top: calc((25px / 2) - (6px / 2));
-            left: 0;
-        }
-
-        #container #menu-wrap .menu {
-            position: absolute;
-            right: -10px;
-            top: calc(-12px + 50px);
-            width: 0;
-            height: 0;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px 15px;
-            -webkit-box-shadow: 2px 4px 6px rgba(49, 49, 49, 0.2);
-            box-shadow: 2px 4px 6px rgba(49, 49, 49, 0.2);
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -webkit-box-align: start;
-            -ms-flex-align: start;
-            align-items: flex-start;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #container #menu-wrap .menu ul {
-            list-style: none;
-        }
-
-        #container #menu-wrap .menu ul li {
-            margin: 15px 0;
-        }
-
-        #container #menu-wrap .menu ul li .link {
-            text-decoration: none;
-            color: rgba(49, 49, 49, 0.85);
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #container #menu-wrap .toggler {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        #container #menu-wrap .toggler:hover + .dots > div,
-        #container #menu-wrap .toggler:hover + .dots > div:after,
-        #container #menu-wrap .toggler:hover + .dots > div:before {
-            background-color: rgba(49, 49, 49, 0.6);
-        }
-
-        #container #menu-wrap .toggler:checked + .dots > div {
-            -webkit-transform: translateX(calc(((25px / 2) - (6px / 2)) * -0.7071067812)) translateY(calc(((25px / 2) - (6px / 2)) * -0.7071067812));
-            -ms-transform: translateX(calc(((25px / 2) - (6px / 2)) * -0.7071067812)) translateY(calc(((25px / 2) - (6px / 2)) * -0.7071067812));
-            transform: translateX(calc(((25px / 2) - (6px / 2)) * -0.7071067812)) translateY(calc(((25px / 2) - (6px / 2)) * -0.7071067812));
-        }
-
-        #container #menu-wrap .toggler:checked + .dots > div:after {
-            -webkit-transform: translateX(calc(((25px / 2) - (6px / 2)) * 0.7071067812)) translateY(calc((2 * (25px / 2) - (6px / 2)) * 0.7071067812));
-            -ms-transform: translateX(calc(((25px / 2) - (6px / 2)) * 0.7071067812)) translateY(calc((2 * (25px / 2) - (6px / 2)) * 0.7071067812));
-            transform: translateX(calc(((25px / 2) - (6px / 2)) * 0.7071067812)) translateY(calc((2 * (25px / 2) - (6px / 2)) * 0.7071067812));
-        }
-
-        #container #menu-wrap .toggler:checked + .dots > div:before {
-            -webkit-transform: translateX(
-                    calc(2 * (((25px / 2) - (6px / 2)) * 0.7071067812))
-            ) translateY(
-                    calc(((25px / 2) - (6px / 2)) - (((25px / 2) - (6px / 2)) * 0.7071067812))
-            );
-            -ms-transform: translateX(calc(2 * (((25px / 2) - (6px / 2)) * 0.7071067812))) translateY(
-                    calc(((25px / 2) - (6px / 2)) - (((25px / 2) - (6px / 2)) * 0.7071067812))
-            );
-            transform: translateX(calc(2 * (((25px / 2) - (6px / 2)) * 0.7071067812))) translateY(
-                    calc(((25px / 2) - (6px / 2)) - (((25px / 2) - (6px / 2)) * 0.7071067812))
-            );
-        }
-
-        #container #menu-wrap .toggler:checked:hover + .dots > div,
-        #container #menu-wrap .toggler:checked:hover + .dots > div:after,
-        #container #menu-wrap .toggler:checked:hover + .dots > div:before {
-            background-color: rgba(49, 49, 49, 0.6);
-            -webkit-transition: 0.5s;
-            -o-transition: 0.5s;
-            transition: 0.5s;
-        }
-
-        #container #menu-wrap .toggler:checked ~ .menu {
-            opacity: 1;
-            visibility: visible;
-            width: 150px;
-            height: 130px;
-            -webkit-transition: 0.5s;
-            -o-transition: 0.5s;
-            transition: 0.5s;
-        }
-
-        #menu-wrap .toggler:checked ~ .menu ul .link {
-            opacity: 1;
-            visibility: visible;
-            -webkit-transition: 0.5s ease 0.3s;
-            -o-transition: 0.5s ease 0.3s;
-            transition: 0.5s ease 0.3s;
-        }
-
-        #menu-wrap .toggler:checked ~ .menu ul .link:hover {
-            color: #2980b9;
-            -webkit-transition: 0.2s;
-            -o-transition: 0.2s;
-            transition: 0.2s;
-        }
-
-        #menu-wrap .toggler:not(:checked) ~ .menu {
-            -webkit-transition: 0.5s;
-            -o-transition: 0.5s;
-            transition: 0.5s;
-        }
-
-        #menu-wrap .toggler:not(:checked) ~ .menu ul .link {
-            opacity: 0;
-            visibility: hidden;
-            -webkit-transition: 0.1s;
-            -o-transition: 0.1s;
-            transition: 0.1s;
-        }
-
-        @media (max-width: 600px) {
-            #container {
-                position: absolute;
-                top: 50px;
-                width: calc(100% - 40px);
-                margin: 0;
-            }
-        }
-
         .button-3 {
             appearance: none;
             background-color: #2ea44f;
@@ -731,56 +565,6 @@
             box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
         }
 
-        .button-4 {
-            appearance: none;
-            background-color: red;
-            border: 1px solid rgba(27, 31, 35, .15);
-            border-radius: 6px;
-            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-            box-sizing: border-box;
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 20px;
-            padding: 6px 16px;
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-
-        .button-4:focus:not(:focus-visible):not(.focus-visible) {
-            box-shadow: none;
-            outline: none;
-        }
-
-        .button-4:hover {
-            background-color: darkred;
-        }
-
-        .button-4:focus {
-            box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-            outline: none;
-        }
-
-        .button-4:disabled {
-            background-color: #94d3a2;
-            border-color: rgba(27, 31, 35, .1);
-            color: rgba(255, 255, 255, .8);
-            cursor: default;
-        }
-
-        .button-4:active {
-            background-color: darkred;
-            box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
-        }
     </style>
 </head>
 
@@ -807,6 +591,16 @@
                 </a>
             </li>
 
+
+            <li>
+                <a href="requests">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                    <span class="title">Requests</span>
+                </a>
+            </li>
+
             <li>
                 <a href="#">
                         <span class="icon">
@@ -815,16 +609,6 @@
                     <span class="title">Customers</span>
                 </a>
             </li>
-
-            <li>
-                <a href="#">
-                        <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
-                        </span>
-                    <span class="title">Messages</span>
-                </a>
-            </li>
-
             <li>
                 <a href="#">
                         <span class="icon">
@@ -853,7 +637,7 @@
             </li>
 
             <li>
-                <a href="logout">
+                <a href="#">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -882,92 +666,40 @@
             </div>
         </div>
 
-        <!-- ======================= Cards ================== -->
-        <div class="cardBox">
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <%
-                            int size = (int)request.getAttribute("size");
-                            out.println(size);%>
-                    </div>
-                    <div class="clipboard-outline">Tasks</div>
-                </div>
 
-                <div class="iconBx">
-                    <ion-icon name="clipboard-outline"></ion-icon>
-                </div>
-            </div>
-        </div>
-        <div style="display: flex ; justify-content: flex-end;margin-right: 3rem">
-            <form action="dashboard/addTask" method="get">
-                <button type="submit" class="button-3">New Task</button>
-            </form>
-        </div>
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>My tasks</h2>
+                    <h2>Requests</h2>
                     <a href="#" class="btn">View All</a>
                 </div>
-                <div style='overflow-x: auto; max-width: 100%;'>
-                    <table>
-                        <thead>
-                        <tr>
-                            <td style="text-align: center">Title</td>
-                            <td style="text-align: center">Description</td>
-                            <td style="text-align: center">Status</td>
-                            <td style="text-align: center">Start Date</td>
-                            <td style="text-align: center">End Date</td>
-                            <td style="text-align: center">Edit Status</td>
-                            <td style="text-align: center">Action</td>
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%
-                            List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-                            if(tasks!=null && !tasks.isEmpty()) {
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Username</td>
+                        <td>Task</td>
+                        <td>Message</td>
+                        <td>Status</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        List<Request> requests = (List<Request>) request.getAttribute("requests");
+                        for (Request requestGet : requests) {
+                            out.println("<tr>");
+                            out.println("<td>" + requestGet.getTask().getUser().getUsername() + "</td>");
+                            out.println("<td>" + requestGet.getTask().getName() + "</td>");
+                            out.println("<td>" + requestGet.getMessage() + "</td>");
+                            out.println("<td>" + requestGet.getStatus() + "</td>");
+                            out.println("<td><form action='assignToUser' method='get'><input type='hidden' name='old_user_id' value=" + requestGet.getTask().getUser().getId() + "><input type='hidden' name='task_id' value=" + requestGet.getTask().getId() + "><button type='submit' class='button-3'>Assign To User</button></form></td>");
+                            out.println("</tr>");
+                        }
+                    %>
+                    </tbody>
 
-                                for (Task task : tasks) {
-                                    out.println("<tr>");
-                                    out.println("<td style='text-align:center'>" + task.getName() + "</td>");
-                                    out.println("<td style='text-align:center'>" + task.getDescription() + "</td>");
-                                    out.println("<td style='text-align:center'>" + task.getStatus() + "</td>");
-                                    out.println("<td style='text-align:center'>" + task.getStartDate() + "</td>");
-                                    out.println("<td style='text-align:center'>" + task.getDateLimit() + "</td>");
-                                    if (task.getStatus().equals("In Progress")) {
-                                        out.println("<td><dev style='display:flex;gap:10px;justify-content:center;'>");
-                                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='VALIDATE'><button class=\"button-3\" role=\"button\">Validate</button></form>\n");
-                                        out.println("<form method='post' action='dashboard/update'><input type='hidden' name='task_id' value=" + task.getId() + "><input type='hidden' name='method' value='CANCELED'><button class=\"button-4\" role=\"button\">Cancel</button></form>\n");
-                                        out.println("</dev></td>");
-                                    } else {
-                                        out.println("<td>Task " + task.getStatus() + "</td>\n");
-                                    }
-                                    out.println("<td><div style='display:flex;gap:5px;justify-content:center'>");
-                                    if (task.isAddedByMe()) {
-                                        out.println("<button style='background-color:green' class='button-3'>Edit</button>");
-                                        out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
-                                    }else if(!task.getIsReplaced()){
-                                        out.println("<form action='dashboard/delete' method='post'><input type='hidden' name='task_id' value=" + task.getId() + "><button type='submit' class='button-4'>Delete</button></form>");
-                                    }else if (!task.getIsReplaced() && task.getRequest() == null &&task.getStatus().equals("In Progress")) {
-                                        out.println("<form action='request' method='get'><input type='hidden' name='task_id' value=" + task.getId() + "><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
-                                    } else if (!task.getIsReplaced() && task.getRequest() != null) {
-                                        out.println("<button  style='background-color:gray' class='button-3'>Request Sent</button>");
-                                    }
-                                    out.println("<div></td>");
-                                    out.println("</tr>");
-                                }
-                            }
-                        %>
-                        </tbody>
-
-
-                    </table>
-                    <%if(size==0){%>
-                    <h1 style="text-align: center">There is no Tasks </h1>
-                    <%}%>
-                </div>
+                </table>
             </div>
         </div>
 
@@ -999,14 +731,6 @@
     };
 
 </script>
-<%
-    if (request.getSession().getAttribute("insufficient_token") != null) {
-        String alert = (String)request.getSession().getAttribute("insufficient_token");
-        request.getSession().removeAttribute("insufficient_token");
-        out.println("<script>alert('" +alert+ "');</script>");
-    }
-%>
-
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
