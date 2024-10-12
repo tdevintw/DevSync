@@ -140,4 +140,14 @@
         <servlet-name>TasksServlet</servlet-name>
         <url-pattern>/tasks</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StaticServlet</servlet-name>
+        <servlet-class>dev.yassiraitelghari.web.StaticServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StaticServlet</servlet-name>
+        <url-pattern>/statics</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -28,9 +28,6 @@ public class DashboardServlet extends HttpServlet {
         if (user != null) {
             if (user.getRole().equals("MANAGER")) {
                 List<User> users = userService.getAll();
-                for(User setUser : users){
-                    setUser.setSuccessPercentage(userService.successPercentage(setUser));
-                }
                 request.setAttribute("users", users);
                 int size = users.size() >0 ? users.size() : 0;
                 request.setAttribute("size", size);

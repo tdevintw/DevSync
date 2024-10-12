@@ -39,7 +39,6 @@
         @Column(name = "delete_jeton")
         private int deleteJeton;
 
-        private double successPercentage;
 
         public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.id = id;
@@ -150,11 +149,7 @@
             this.deleteJeton = deleteJeton;
         }
 
-        public double getSuccessPercentage() {
-            return successPercentage;
-        }
 
-        public void setSuccessPercentage(double successPercentage) {
-            this.successPercentage = successPercentage;
-        }
+
+
     }
