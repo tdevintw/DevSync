@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
@@ -29,6 +28,9 @@ public class DashboardServlet extends HttpServlet {
         if (user != null) {
             if (user.getRole().equals("MANAGER")) {
                 List<User> users = userService.getAll();
+                for(User setUser : users){
+                    setUser.setSuccessPercentage(userService.successPercentage(setUser));
+                }
                 request.setAttribute("users", users);
                 int size = users.size() >0 ? users.size() : 0;
                 request.setAttribute("size", size);

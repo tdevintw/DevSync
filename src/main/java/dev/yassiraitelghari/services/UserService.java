@@ -21,6 +21,7 @@ public interface UserService {
 
     boolean updateDeleteToken();
 
+    double successPercentage(User user);
 
 
 }

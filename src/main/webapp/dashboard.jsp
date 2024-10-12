@@ -669,6 +669,7 @@
                         <td>Email</td>
                         <td>Username</td>
                         <td>Role</td>
+                        <td>Tasks Finished</td>
                         <td>Add Tasks</td>
                     </tr>
                     </thead>
@@ -676,10 +677,16 @@
                     <%
                         List<User> users = (List<User>) request.getAttribute("users");
                         for (User user : users) {
+
                             out.println("<tr>");
                             out.println("<td>" + user.getEmail() + "</td>");
                             out.println("<td>" + user.getUsername() + "</td>");
                             out.println("<td>" + user.getRole() + "</td>");
+                            if(user.getSuccessPercentage()<0){
+                                out.println("<td>No tasks found</td>");
+                            }else{
+                                out.println("<td>"+user.getSuccessPercentage()+"%</td>");
+                            }
                             out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
                             out.println("</tr>");
                         }

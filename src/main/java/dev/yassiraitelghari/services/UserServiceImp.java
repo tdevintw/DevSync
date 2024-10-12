@@ -47,5 +47,16 @@ public class UserServiceImp implements UserService{
         return userRepository.updateDeleteToken();
     }
 
+    @Override
+    public double successPercentage(User user){
+        if(user.getTasks().isEmpty()){
+            return -1;
+        }else{
+           int validatedTasksCount =  user.getTasks().stream().filter(task -> task.getStatus().equals("Validated")).toList().size();
+           int totalTasks = user.getTasks().size();
+           return (double) (validatedTasksCount * 100) /totalTasks;
+        }
+    }
+
 
 }
