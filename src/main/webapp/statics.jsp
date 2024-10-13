@@ -761,9 +761,9 @@
                 </ul>
             </details>
         </div>
-        <div style="width: 80%;display: flex;align-items: center;justify-content: center">
+        <div style="width: 100%;display: flex;align-items: center;justify-content: center;margin-top: 3rem">
         <div style="overflow-x: auto">
-            <canvas id="myChart1" style="width:100%;"></canvas>
+            <canvas id="myChart1"></canvas>
         </div>
         </div>
     </div>
@@ -830,7 +830,6 @@
         return index < 5 ? ["red", "green", "blue", "orange", "brown"][index] : getRandomColor();
     });
 
-    // Create a new Chart
     new Chart("myChart1", {
         type: "bar",
         data: {
@@ -841,6 +840,13 @@
             }]
         },
         options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true // Ensure that the y-axis starts at 0
+                    }
+                }]
+            },
             legend: { display: false },
             title: {
                 display: true,
