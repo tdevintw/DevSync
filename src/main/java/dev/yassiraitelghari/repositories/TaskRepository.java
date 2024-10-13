@@ -3,6 +3,7 @@ package dev.yassiraitelghari.repositories;
 import dev.yassiraitelghari.domain.Task;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TaskRepository {
 
@@ -19,4 +20,6 @@ public interface TaskRepository {
     boolean updateTasks(int user_id);
 
     List<Task> getAll();
+
+
 }

@@ -61,6 +61,7 @@ public class TaskRepositoryImp implements TaskRepository {
                 updatedTask.setStatus(task.getStatus());
                 updatedTask.setIsReplaced(task.getIsReplaced());
                 updatedTask.setRequest(task.getRequest());
+                updatedTask.setValidatedAt(task.getValidatedAt());
                 entityManager.merge(updatedTask);
             }
             entityManager.getTransaction().commit();

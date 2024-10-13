@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "UpdateTaskServlet")
 public class UpdateTaskServlet extends HttpServlet {
@@ -20,6 +21,7 @@ public class UpdateTaskServlet extends HttpServlet {
         if (method.equals("VALIDATE")) {
             Task task = taskService.findTask(Integer.parseInt(request.getParameter("task_id")));
             task.setStatus("Validated");
+            task.setValidatedAt(LocalDateTime.now());
             taskService.update(task);
             response.sendRedirect("../dashboard");
 

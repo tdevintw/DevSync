@@ -3,7 +3,9 @@ package dev.yassiraitelghari.services;
 import dev.yassiraitelghari.domain.Task;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 public interface TaskService {
     boolean validateTitle(String title);
@@ -31,4 +33,10 @@ public interface TaskService {
     List<Task> getAll();
 
     boolean isTaskWithTag(Task task , String tag);
+
+    Map<Integer , Integer> staticsByWeeks();
+
+    Map<YearMonth, Integer> staticsByMonths();
+
+    Map<Integer , Integer> staticsByYears();
 }

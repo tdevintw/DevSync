@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dev.yassiraitelghari.services.UserService" %>
 <%@ page import="dev.yassiraitelghari.services.UserServiceImp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
     <!-- ======= Styles ====== -->
     <style>
         /* =========== Google Fonts ============ */
@@ -516,6 +519,135 @@
                 left: initial;
             }
         }
+        /* Follow me for more pens like this! */
+
+        /* Tweak to change the look and feel */
+        :root {
+            --button-background: dodgerblue;
+            --button-color: white;
+
+            --dropdown-highlight: dodgerblue;
+            --dropdown-width: 160px;
+            --dropdown-background: white;
+            --dropdown-color: black;
+        }
+
+
+        /* Boring button styles */
+        a.button {
+            /* Frame */
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-sizing: border-box;
+
+            /* Style */
+            border: none;
+            background: var(--button-background);
+            color: var(--button-color);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        a.button:active {
+            filter: brightness(75%);
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            padding: 0;
+            margin-right: 1em;
+
+            border: none;
+        }
+
+        .dropdown summary {
+            list-style: none;
+            list-style-type: none;
+        }
+
+        .dropdown > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown summary:focus {
+            outline: none;
+        }
+
+        .dropdown summary:focus a.button {
+            border: 2px solid white;
+        }
+
+        .dropdown summary:focus {
+            outline: none;
+        }
+
+        .dropdown ul {
+            position: absolute;
+            margin: 20px 0 0 0;
+            padding: 20px 0;
+            width: var(--dropdown-width);
+            left: 50%;
+            margin-left: calc((var(--dropdown-width) / 2)  * -1);
+            box-sizing: border-box;
+            z-index: 2;
+
+            background: var(--dropdown-background);
+            border-radius: 6px;
+            list-style: none;
+        }
+
+        .dropdown ul li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown ul li a:link, .dropdown ul li a:visited {
+            display: inline-block;
+            padding: 10px 0.8rem;
+            width: 100%;
+            box-sizing: border-box;
+
+            color: var(--dropdown-color);
+            text-decoration: none;
+        }
+
+        .dropdown ul li a:hover {
+            background-color: var(--dropdown-highlight);
+            color: var(--dropdown-background);
+        }
+
+        /* Dropdown triangle */
+        .dropdown ul::before {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+            border-style: solid;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent var(--dropdown-background) transparent;
+        }
+
+
+        /* Close the dropdown with outside clicks */
+        .dropdown > summary::before {
+            display: none;
+        }
+
+        .dropdown[open] > summary::before {
+            content: ' ';
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+        }
 
     </style>
 </head>
@@ -613,92 +745,27 @@
             </div>
 
             <div class="user">
-                <img src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user" alt="">
+                <img src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user"
+                     alt="">
             </div>
         </div>
-
-        <!-- ======================= Cards ================== -->
-        <div class="cardBox">
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <% out.println((int) request.getAttribute("size"));%>
-                    </div>
-                    <div class="cardName">Users</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="people-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">80</div>
-                    <div class="clipboard-outline">Tasks</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="clipboard-outline"></ion-icon>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers">
-                        <% out.println((int) request.getAttribute("token_size"));%>
-                    </div>
-                    <div class="cardName">Tokens</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="wallet-outline"></ion-icon>
-                </div>
-            </div>
-
+        <div style="display: flex;justify-content: flex-end ; margin-right: 5rem;">
+            <details class="dropdown">
+                <summary role="button">
+                    <a class="button">Filter successful Task By</a>
+                </summary>
+                <ul>
+                    <li><a href="statics?by=week">Weeks</a></li>
+                    <li><a href="statics?by=month">Months</a></li>
+                    <li><a href="statics?by=year">Years</a></li>
+                </ul>
+            </details>
         </div>
-
-        <div class="details">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Assign Tasks</h2>
-                    <a href="#" class="btn">View All</a>
-                </div>
-
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Email</td>
-                        <td>Username</td>
-                        <td>Role</td>
-                        <td>Tasks Finished</td>
-                        <td>Add Tasks</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                        List<User> users = (List<User>) request.getAttribute("users");
-                        for (User user : users) {
-                            UserService userService = new UserServiceImp();
-                            out.println("<tr>");
-                            out.println("<td>" + user.getEmail() + "</td>");
-                            out.println("<td>" + user.getUsername() + "</td>");
-                            out.println("<td>" + user.getRole() + "</td>");
-                            if(userService.successPercentage(user)<0){
-                                out.println("<td>No tasks found</td>");
-                            }else{
-                                out.println("<td>"+userService.successPercentage(user)+"%</td>");
-                            }
-                            out.println("<td><a href='dashboard/addTask?id=" + user.getId() + "'><img style='height: 30px' src='https://cdn-icons-png.flaticon.com/256/10337/10337579.png'></a></td>");
-                            out.println("</tr>");
-                        }
-                    %>
-                    </tbody>
-
-                </table>
-            </div>
+        <div style="width: 100%;display: flex;align-items: center;justify-content: center;margin-top: 2rem;">
+        <div style="overflow-x: auto">
+            <canvas id="myChart1" style="width:50rem !important;height: auto !important;"></canvas>
         </div>
-
+        </div>
     </div>
 </div>
 
@@ -726,6 +793,67 @@
         main.classList.toggle("active");
     };
 
+</script>
+
+<script>
+    // Initialize empty arrays for labels and data
+    const xValues = [];
+    const yValues = [];
+
+    // Populate xValues from the Java key list
+    <%
+        for (String k : (List<String>)request.getAttribute("keys")) {
+    %>
+    xValues.push("<%= k %>");
+    <%
+        }
+        for (Integer v : (List<Integer>)request.getAttribute("values")) {
+    %>
+    yValues.push(<%= v %>);
+    <%
+        }
+    %>
+
+    // Function to generate random color
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Create an array for bar colors based on the data length
+    const barColors = yValues.map((value, index) => {
+        // Use a random color if there's no predefined color
+        return index < 5 ? ["red", "green", "blue", "orange", "brown"][index] : getRandomColor();
+    });
+
+    new Chart("myChart1", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true // Ensure that the y-axis starts at 0
+                    }
+                }]
+            },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "${title}" // Use the title set in your Java code
+            }
+        }
+    });
 </script>
 
 <!-- ====== ionicons ======= -->

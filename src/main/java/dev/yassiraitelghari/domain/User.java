@@ -40,7 +40,6 @@
         private int deleteJeton;
 
 
-
         public User(int id, String username, String name, String lastName, String email, String password, String role, List<Task> tasks, int replaceJeton, int deleteJeton) {
             this.id = id;
             this.username = username;
@@ -149,4 +148,8 @@
         public void setDeleteJeton(int deleteJeton) {
             this.deleteJeton = deleteJeton;
         }
+
+
+
+
     }
