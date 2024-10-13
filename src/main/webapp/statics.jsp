@@ -796,10 +796,41 @@
 </script>
 
 <script>
-    const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    const yValues = [55, 49, 44, 24, 15];
-    const barColors = ["red", "green","blue","orange","brown"];
+    // Initialize empty arrays for labels and data
+    const xValues = [];
+    const yValues = [];
 
+    // Populate xValues from the Java key list
+    <%
+        for (String k : (List<String>)request.getAttribute("keys")) {
+    %>
+    xValues.push("<%= k %>");
+    <%
+        }
+        for (Integer v : (List<Integer>)request.getAttribute("values")) {
+    %>
+    yValues.push(<%= v %>);
+    <%
+        }
+    %>
+
+    // Function to generate random color
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Create an array for bar colors based on the data length
+    const barColors = yValues.map((value, index) => {
+        // Use a random color if there's no predefined color
+        return index < 5 ? ["red", "green", "blue", "orange", "brown"][index] : getRandomColor();
+    });
+
+    // Create a new Chart
     new Chart("myChart1", {
         type: "bar",
         data: {
@@ -810,14 +841,15 @@
             }]
         },
         options: {
-            legend: {display: false},
+            legend: { display: false },
             title: {
                 display: true,
-                text: "World Wine Production 2018"
+                text: "${title}" // Use the title set in your Java code
             }
         }
     });
 </script>
+
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
