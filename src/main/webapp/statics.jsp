@@ -761,9 +761,9 @@
                 </ul>
             </details>
         </div>
-        <div style="width: 100%;display: flex;align-items: center;justify-content: center;margin-top: 3rem">
+        <div style="width: 100%;display: flex;align-items: center;justify-content: center;margin-top: 2rem;">
         <div style="overflow-x: auto">
-            <canvas id="myChart1"></canvas>
+            <canvas id="myChart1" style="width:50rem !important;height: auto !important;"></canvas>
         </div>
         </div>
     </div>
