@@ -31,6 +31,9 @@ public class Task {
     @Column(name = "date_limit")
     private LocalDateTime dateLimit;
 
+    @Column(name = "validated_at")
+    private LocalDateTime validatedAt;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tag> tags;
 
@@ -99,6 +102,14 @@ public class Task {
 
     public void setDateLimit(LocalDateTime dateLimit) {
         this.dateLimit = dateLimit;
+    }
+
+    public LocalDateTime getValidatedAt() {
+        return validatedAt;
+    }
+
+    public void setValidatedAt(LocalDateTime validatedAt) {
+        this.validatedAt = validatedAt;
     }
 
     public List<Tag> getTags() {

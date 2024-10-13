@@ -76,7 +76,7 @@ public class TaskServiceImp implements TaskService {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         List<Task> validatedTasks = this.getAll().stream().filter(task -> task.getStatus().equals("Validated")).toList();
         for(Task task : validatedTasks){
-            int week = task.getDateLimit().get(weekFields.weekOfWeekBasedYear());
+            int week = task.getValidatedAt().get(weekFields.weekOfWeekBasedYear());
             if(map.containsKey(week)){
                 map.put(week , map.get(week)+1);
             }else{
@@ -90,7 +90,7 @@ public class TaskServiceImp implements TaskService {
         Map<YearMonth , Integer> map = new HashMap<>();
         List<Task> validatedTasks = this.getAll().stream().filter(task -> task.getStatus().equals("Validated")).toList();
         for(Task task : validatedTasks){
-            YearMonth month = YearMonth.from(task.getDateLimit());
+            YearMonth month = YearMonth.from(task.getValidatedAt());
             if(map.containsKey(month)){
                 map.put(month , map.get(month)+1);
 
@@ -106,7 +106,7 @@ public class TaskServiceImp implements TaskService {
         Map<Integer , Integer> map = new HashMap<>();
         List<Task> validatedTasks = this.getAll().stream().filter(task -> task.getStatus().equals("Validated")).toList();
         for(Task task : validatedTasks){
-            int year = task.getDateLimit().getYear();
+            int year = task.getValidatedAt().getYear();
             if(map.containsKey(year)){
                 map.put(year , map.get(year)+1);
             }else{
