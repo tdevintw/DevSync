@@ -16,7 +16,7 @@ public class ProfileUpdateValidation {
         }
 
         if(lastName.length()<3){
-            this.firstName = "Last name is too short";
+            this.lastName = "Last name is too short";
         }
         if(password.isEmpty() && confirmPassword.isEmpty()){
             password = null;
