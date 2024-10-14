@@ -26,6 +26,8 @@ public class DeleteTaskServlet extends HttpServlet {
 
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
 
         String id = request.getParameter("task_id");

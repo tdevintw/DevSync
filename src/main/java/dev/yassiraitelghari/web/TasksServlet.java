@@ -20,6 +20,7 @@ public class TasksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
 
@@ -32,6 +33,7 @@ public class TasksServlet extends HttpServlet {
 
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
         String tag = request.getParameter("tag");

@@ -18,9 +18,9 @@ public class RequestsServlet extends HttpServlet {
     private RequestService requestService = new RequestServiceImp();
     @Override
     protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
-        if(!((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+        if(request.getSession().getAttribute("user")==null || !((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
-
+return;
         }
 
            List<Request> requestList = requestService.getAll().stream().filter(request1 -> request1.getStatus().equals("Pending")).toList();

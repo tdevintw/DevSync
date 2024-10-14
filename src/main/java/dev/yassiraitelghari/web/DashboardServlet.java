@@ -30,6 +30,8 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
 
         HttpSession session = request.getSession(false);

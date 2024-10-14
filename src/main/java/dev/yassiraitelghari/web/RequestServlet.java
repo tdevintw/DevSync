@@ -31,6 +31,7 @@ public class RequestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
 
@@ -49,6 +50,7 @@ public class RequestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
 

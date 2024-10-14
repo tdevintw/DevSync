@@ -28,7 +28,7 @@ public class AssignTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
+        if (request.getSession().getAttribute("user")!=null && !((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
             int taskId = Integer.parseInt(request.getParameter("task_id"));
             int oldUserId = Integer.parseInt(request.getParameter("old_user_id"));
             Task task = taskService.findTask(taskId);
@@ -51,9 +51,9 @@ public class AssignTaskServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        if(((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
-            HttpServletResponse httpServletResponse = (HttpServletResponse) response ;
-            httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+        if(request.getSession().getAttribute("user")==null || ((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
         int userId = Integer.parseInt(request.getParameter("user_id"));

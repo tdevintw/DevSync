@@ -29,6 +29,8 @@ public class AddTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
 
 
@@ -57,6 +59,8 @@ public class AddTaskServlet extends HttpServlet {
 
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
 
         TaskErrors taskError = new TaskErrors();

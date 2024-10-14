@@ -24,6 +24,8 @@ public class AddTagsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if((request.getSession().getAttribute("user"))==null){
         response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
         request.getRequestDispatcher("/dashboard/addTags.jsp").forward(request, response);
     }
@@ -32,6 +34,8 @@ public class AddTagsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
         }
 
         if (request.getParameter("cancel") != null) {

@@ -20,8 +20,9 @@ public class StaticServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(!((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+        if(request.getSession().getAttribute("user")==null || !((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
         String choice = request.getParameter("by");

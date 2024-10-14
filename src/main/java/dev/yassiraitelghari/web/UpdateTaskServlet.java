@@ -20,6 +20,7 @@ public class UpdateTaskServlet extends HttpServlet {
 
         if((request.getSession().getAttribute("user"))==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
 
         String method = request.getParameter("method");
