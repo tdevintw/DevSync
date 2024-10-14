@@ -12,14 +12,22 @@ import java.util.regex.Pattern;
 public class RegisterValidationMessages {
 
     private UserService userService = new UserServiceImp();
-    private static final String EMAIL_PATTERN =
-            "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+
+    private User registredUser;
+
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     // Compile the pattern
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
+    public User getRegistredUser() {
+        return registredUser;
+    }
 
-    private static RegisterValidationMessages registerValidationMessage;
+    public void setRegistredUser(User registredUser) {
+        this.registredUser = registredUser;
+    }
 
     private String usernameValidationMessage;
 
@@ -37,9 +45,6 @@ public class RegisterValidationMessages {
         return usernameValidationMessage == null && firstNameValidationMessage == null && lastNameValidationMessage == null && emailValidationMessage == null && passwordValidationMessage == null && roleValidationMessage == null;
     }
 
-    private RegisterValidationMessages() {
-    }
-
     public void validateAll(String username, String email, String name, String lastName, String password, String role) {
         setUsernameValidationMessage(username);
         setFirstNameValidationMessage(name);
@@ -49,12 +54,6 @@ public class RegisterValidationMessages {
         setEmailValidationMessage(email);
     }
 
-    public static RegisterValidationMessages getRegisterValidationMessage() {
-        if (registerValidationMessage == null) {
-            registerValidationMessage = new RegisterValidationMessages();
-        }
-        return registerValidationMessage;
-    }
 
     public String getUsernameValidationMessage() {
         return usernameValidationMessage;
@@ -127,18 +126,5 @@ public class RegisterValidationMessages {
         }
     }
 
-    public void resetAll() {
-        usernameValidationMessage = null;
-
-        firstNameValidationMessage = null;
-
-        lastNameValidationMessage = null;
-
-        emailValidationMessage = null;
-
-        passwordValidationMessage = null;
-
-        roleValidationMessage = null;
-    }
 
 }

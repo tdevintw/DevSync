@@ -13,11 +13,10 @@ public class UserServiceImp implements UserService {
     private UserRepository userRepository = new UserRepositoryImp();
 
     @Override
-    public User add(String username, String email, String name, String lastName, String password, String role) {
-        RegisterValidationMessages.getRegisterValidationMessage().resetAll();
-        RegisterValidationMessages.getRegisterValidationMessage().validateAll(username, email, name, lastName, password, role);
-        RegisterValidationMessages validation = RegisterValidationMessages.getRegisterValidationMessage();
-        if (validation.allNull()) {
+    public RegisterValidationMessages add(String username, String email, String name, String lastName, String password, String role) {
+        RegisterValidationMessages validationMessages = new RegisterValidationMessages();
+        validationMessages.validateAll(username, email, name, lastName, password, role);
+        if (validationMessages.allNull()) {
             User user = new User();
             user.setUsername(username);
             user.setName(name);
@@ -27,12 +26,12 @@ public class UserServiceImp implements UserService {
             user.setLastName(lastName);
             user.setReplaceJeton(2);
             user.setDeleteJeton(1);
-            return userRepository.add(user);
-        } else {
-            return null;
+            if (userRepository.add(user) != null) {
+                validationMessages.setRegistredUser(userRepository.add(user));
+            }
         }
+        return validationMessages;
     }
-
     @Override
     public Optional<User> get(String email) {
         return userRepository.get(email);
