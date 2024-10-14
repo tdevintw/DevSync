@@ -1,6 +1,7 @@
 package dev.yassiraitelghari.services.interfaces;
 
 import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.utils.ProfileUpdateValidation;
 import dev.yassiraitelghari.utils.RegisterValidationMessages;
 
 import java.util.List;
@@ -12,6 +13,9 @@ public interface UserService {
     Optional<User> get(String email , String password);
 
     User update(User user);
+
+    ProfileUpdateValidation updateProfile(User user , String  firstName , String lastName , String password , String confirmPassword);
+
 
     boolean delete(User user);
 

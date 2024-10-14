@@ -3,6 +3,7 @@ package dev.yassiraitelghari.web;
 import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.services.interfaces.UserService;
 import dev.yassiraitelghari.services.implmentations.UserServiceImp;
+import dev.yassiraitelghari.utils.ProfileUpdateValidation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,13 +17,14 @@ import java.io.IOException;
 public class ProfileServlet extends HttpServlet {
 
 
-    private UserService userService =  new UserServiceImp();
+    private UserService userService = new UserServiceImp();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if(session !=null){
+        if (session != null) {
             User user = (User) session.getAttribute("user");
-            if(user!=null){
+            if (user != null) {
                 request.getRequestDispatcher("profile.jsp").forward(request, response);
             }
         }
@@ -30,28 +32,26 @@ public class ProfileServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request , HttpServletResponse response) throws ServletException , IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstName = request.getParameter("name");
         String lastName = request.getParameter("last_name");
-        String password= request.getParameter("password");
+        String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm_password");
         String method = request.getParameter("_method");
-        if(method != null && method.equals("DELETE")){
-            User user = (User) request.getSession(false).getAttribute("user");
-            if(userService.delete(user)){
+        User user = (User) request.getSession(false).getAttribute("user");
+        if (method != null && method.equals("DELETE")) {
+            if (userService.delete(user)) {
                 request.getSession(false).invalidate();
             }
             response.sendRedirect("login");
             return;
         }
-        if(password.equals(confirmPassword)){
-            User user = (User) request.getSession(false).getAttribute("user");
-            user.setName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(password);
-           userService.update(user);
-           response.sendRedirect("profile");
+        ProfileUpdateValidation profileUpdateValidation = userService.updateProfile(user, firstName, lastName, password, confirmPassword);
+        if(profileUpdateValidation.getUpdatedUser()!=null){
+            request.getSession().setAttribute("user",profileUpdateValidation.getUpdatedUser());
         }
+        request.setAttribute("errors", profileUpdateValidation);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
 
     }
 }

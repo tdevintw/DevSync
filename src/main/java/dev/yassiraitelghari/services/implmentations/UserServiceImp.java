@@ -4,6 +4,7 @@ import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.repositories.interfaces.UserRepository;
 import dev.yassiraitelghari.repositories.implmentations.UserRepositoryImp;
 import dev.yassiraitelghari.services.interfaces.UserService;
+import dev.yassiraitelghari.utils.ProfileUpdateValidation;
 import dev.yassiraitelghari.utils.RegisterValidationMessages;
 
 import java.util.List;
@@ -51,7 +52,22 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User update(User user) {
+    public ProfileUpdateValidation updateProfile(User user , String  firstName ,String lastName ,String password , String confirmPassword) {
+        ProfileUpdateValidation profileUpdateValidation = new ProfileUpdateValidation();
+        profileUpdateValidation.setAll(firstName , lastName , password , confirmPassword);
+        if(profileUpdateValidation.allNull()){
+            user.setName(firstName);
+            user.setLastName(lastName);
+            if(!password.isEmpty()){
+                user.setPassword(BCrypt.hashpw( password , BCrypt.gensalt()));
+            }
+            profileUpdateValidation.setUpdatedUser(userRepository.update(user));
+        }
+        return profileUpdateValidation;
+    }
+
+    @Override
+    public User update (User user){
         return userRepository.update(user);
     }
 
