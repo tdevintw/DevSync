@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepositoryImp implements UserRepository {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("PUnit");
@@ -25,19 +26,14 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public User get(String email) {
+    public Optional<User> get(String email) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        User user = null;
+        Optional<User> user = Optional.empty();
         try {
-            entityManager.getTransaction().begin();
             TypedQuery<User> query = entityManager.createQuery("FROM User WHERE email = :email", User.class);
             query.setParameter("email", email);
-            user = query.getSingleResult();
-            entityManager.getTransaction().commit();
+            user = Optional.ofNullable(query.getSingleResult());
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             e.printStackTrace(); // Log the exception
         } finally {
             entityManager.close();
@@ -119,13 +115,13 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public User findById(int id){
+    public User findById(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         User user = null;
-        try{
+        try {
             entityManager.getTransaction().begin();
-            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE id = :id" , User.class);
-            query.setParameter("id" , id);
+            TypedQuery<User> query = entityManager.createQuery("FROM User WHERE id = :id", User.class);
+            query.setParameter("id", id);
             user = query.getSingleResult();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -140,20 +136,20 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public boolean updateReplaceToken(){
+    public boolean updateReplaceToken() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("UPDATE User user SET user.replaceJeton =  2");
             int rowsAffected = query.executeUpdate();
             entityManager.getTransaction().commit();
-            return rowsAffected>0;
-        }catch (Exception e){
-            if(entityManager.getTransaction().isActive()){
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
-        }finally {
+        } finally {
             entityManager.close();
         }
         return true;
@@ -161,25 +157,40 @@ public class UserRepositoryImp implements UserRepository {
 
 
     @Override
-    public boolean updateDeleteToken(){
+    public boolean updateDeleteToken() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("UPDATE User user SET user.deleteJeton =  1");
             int rowsAffected = query.executeUpdate();
             entityManager.getTransaction().commit();
-            return rowsAffected>0;
-        }catch (Exception e){
-            if(entityManager.getTransaction().isActive()){
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
-        }finally {
+        } finally {
             entityManager.close();
         }
         return true;
     }
 
+    @Override
+    public Optional<User> getByUsername(String username) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Optional<User> user = Optional.empty();
+        try{
+            TypedQuery<User> query = entityManager.createQuery("FROM User  WHERE username = :username" , User.class);
+            query.setParameter("username" , username);
+            user = Optional.ofNullable(query.getSingleResult());
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return user;
+    }
 
 }
 

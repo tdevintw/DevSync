@@ -2,12 +2,14 @@ package dev.yassiraitelghari.services;
 
 import dev.yassiraitelghari.domain.User;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
-    User add(User user);
+    User add(String username ,String email ,String name ,String lastName ,String password ,String role);
 
-    User get(String email);
+    Optional<User> get(String email);
 
     User update(User user);
 
@@ -23,5 +25,6 @@ public interface UserService {
 
     double successPercentage(User user);
 
+    Optional<User> getByUsername(String username);
 
 }

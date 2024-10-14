@@ -3,11 +3,12 @@ package dev.yassiraitelghari.repositories;
 import dev.yassiraitelghari.domain.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository {
     User add(User user);
 
-    User get(String email);
+    Optional<User> get(String email);
 
     User update(User user);
 
@@ -20,5 +21,7 @@ public interface UserRepository {
     boolean updateReplaceToken();
 
     boolean updateDeleteToken();
+
+    Optional<User> getByUsername(String username);
 
 }

@@ -156,8 +156,16 @@
 <form action="register" method="post">
     <h3>Register Here</h3>
 
+    <label for="username">UserName</label>
+    <input name="username" type="text" placeholder="username" id="username" required>
     <label for="email">Email</label>
     <input name="email" type="text" placeholder="Email" id="email" required>
+    <label for="password">Password</label>
+    <input name="password" type="text" placeholder="password" id="password" required>
+    <label for="first_name">First Name</label>
+    <input name="first_name" type="text" placeholder="first name" id="first_name" required>
+    <label for="last_name">Last Name</label>
+    <input name="last_name" type="text" placeholder="last name" id="last_name" required>
 
     <div class="checkbox-group">
         <label style="margin-top: 0" for="manager">Manager</label>
@@ -168,8 +176,7 @@
 
     <button type="submit">Register</button>
     <div class="social">
-        <div class="go"><i class="fab fa-google"></i>  Google</div>
-        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        <div class="go" style="width: 100%"><a href="login">Already have account ?</a></div>
     </div>
 </form>
 </body>

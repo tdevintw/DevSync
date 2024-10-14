@@ -763,7 +763,7 @@
         </div>
         <div style="width: 100%;display: flex;align-items: center;justify-content: center;margin-top: 2rem;">
         <div style="overflow-x: auto">
-            <canvas id="myChart1" style="width:50rem !important;height: auto !important;"></canvas>
+            <canvas id="myChart1" style="width: 50rem ; height: auto;"></canvas>
         </div>
         </div>
     </div>

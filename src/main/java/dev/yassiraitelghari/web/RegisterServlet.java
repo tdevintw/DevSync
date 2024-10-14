@@ -5,6 +5,7 @@ import java.io.IOException;
 import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.services.UserService;
 import dev.yassiraitelghari.services.UserServiceImp;
+import dev.yassiraitelghari.utils.RegisterValidationMessages;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,26 +37,19 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = "username99";
+        String username = request.getParameter("username");
         String email = request.getParameter("email");
-        String name = "name";
-        String lastName = "lastName";
-        String password = "password";
+        String name = request.getParameter("first_name");
+        String lastName = request.getParameter("last_name");
+        String password = request.getParameter("password");
         String role = request.getParameter("role").toUpperCase();
 
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setPassword(password);
-        user.setRole(role);
-        user.setDeleteJeton(1);
-        user.setReplaceJeton(2);
-        if (userService.add(user) != null) {
+
+        if (userService.add(username, email, name, lastName, password, role) != null) {
             response.sendRedirect("login");
         } else {
-            response.sendRedirect("/");
+            request.setAttribute("registerValidation", RegisterValidationMessages.getRegisterValidationMessage());
+            request.getRequestDispatcher("request.jsp").forward(request, response);
         }
     }
 }
