@@ -22,11 +22,18 @@ public class AddTagsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
         request.getRequestDispatcher("/dashboard/addTags.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         if (request.getParameter("cancel") != null) {
             User user = (User) request.getSession().getAttribute("user");
             request.getSession().invalidate();

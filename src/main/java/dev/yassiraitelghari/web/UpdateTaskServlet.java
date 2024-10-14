@@ -17,6 +17,11 @@ public class UpdateTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         String method = request.getParameter("method");
         if (method.equals("VALIDATE")) {
             Task task = taskService.findTask(Integer.parseInt(request.getParameter("task_id")));

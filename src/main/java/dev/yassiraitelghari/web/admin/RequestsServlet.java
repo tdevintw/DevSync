@@ -18,14 +18,14 @@ public class RequestsServlet extends HttpServlet {
     private RequestService requestService = new RequestServiceImp();
     @Override
     protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
-       if(((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+        if(!((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+        }
+
            List<Request> requestList = requestService.getAll().stream().filter(request1 -> request1.getStatus().equals("Pending")).toList();
            request.setAttribute("requests" ,requestList );
            request.getRequestDispatcher("requests.jsp").forward(request , response);
-       }else{
-           request.getRequestDispatcher("404.jsp").forward(request , response);
-       }
-
     }
 }
 

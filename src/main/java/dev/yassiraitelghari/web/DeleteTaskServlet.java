@@ -22,6 +22,12 @@ public class DeleteTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         String id = request.getParameter("task_id");
         int parsedId = Integer.parseInt(id);
         Task task = taskService.findTask(parsedId);

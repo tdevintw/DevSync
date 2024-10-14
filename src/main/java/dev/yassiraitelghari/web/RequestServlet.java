@@ -29,6 +29,11 @@ public class RequestServlet extends HttpServlet {
     private UserService userService = new UserServiceImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+
         Task task = taskService.findTask(Integer.parseInt(request.getParameter("task_id")));
         if (task.getUser().getReplaceJeton() < 1) {
             request.getSession().setAttribute("insufficient_token", "insufficient Replace Token , wait until next day");
@@ -42,6 +47,11 @@ public class RequestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+
         int currentHour = LocalDateTime.now().getHour();
         int dayOfTheWeel = LocalDateTime.now().getDayOfWeek().getValue();
 

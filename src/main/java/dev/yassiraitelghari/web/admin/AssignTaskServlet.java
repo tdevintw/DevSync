@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-
+import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "AssignTaskServlet")
 public class AssignTaskServlet extends HttpServlet {
     private UserService userService = new UserServiceImp();
@@ -28,7 +28,7 @@ public class AssignTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
+        if (!((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
             int taskId = Integer.parseInt(request.getParameter("task_id"));
             int oldUserId = Integer.parseInt(request.getParameter("old_user_id"));
             Task task = taskService.findTask(taskId);
@@ -43,13 +43,19 @@ public class AssignTaskServlet extends HttpServlet {
                 response.sendRedirect("requests");
                 return;
             }
-            request.getRequestDispatcher("assignToUsers.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/assignToUsers.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("404.jsp").forward(request, response);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        if(((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response ;
+            httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         int userId = Integer.parseInt(request.getParameter("user_id"));
         User newUser = userService.findById(userId);
         if (newUser == null || this.oldUser == null) {

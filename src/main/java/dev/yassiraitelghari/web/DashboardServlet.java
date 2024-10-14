@@ -28,6 +28,10 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -39,7 +43,7 @@ public class DashboardServlet extends HttpServlet {
                 List<Request> requestsWithToken = requestService.RequestWithToken();
                 int tokenSize = requestsWithToken.isEmpty() ? 0  :  requestsWithToken.size() ;
                 request.setAttribute("token_size" ,tokenSize);
-                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
             } else if (user.getRole().equals("CLIENT")) {
                 List<Task> tasks = null;
                 int size = 0;

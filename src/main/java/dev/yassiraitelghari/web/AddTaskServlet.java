@@ -27,6 +27,11 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+
       User activeUser = (User) request.getSession().getAttribute("user");
        if(activeUser.getRole().equals("MANAGER")){
            String stringId = request.getParameter("id");
@@ -49,6 +54,11 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         TaskErrors taskError = new TaskErrors();
         LocalDateTime startLocalDateTime = null;
         LocalDateTime endLocalDateTime = null;

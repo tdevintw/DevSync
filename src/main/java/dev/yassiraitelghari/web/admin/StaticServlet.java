@@ -1,5 +1,6 @@
 package dev.yassiraitelghari.web.admin;
 
+import dev.yassiraitelghari.domain.User;
 import dev.yassiraitelghari.services.interfaces.TaskService;
 import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
 import jakarta.servlet.ServletException;
@@ -19,6 +20,10 @@ public class StaticServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(!((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         String choice = request.getParameter("by");
         List<String> key = new ArrayList<>();
         List<Integer> value = new ArrayList<>();
@@ -51,7 +56,7 @@ public class StaticServlet extends HttpServlet {
         request.setAttribute("values", value);
         request.setAttribute("keys", key);
         request.setAttribute("title", title);
-        request.getRequestDispatcher("statics.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/statics.jsp").forward(request, response);
 
     }
 }
