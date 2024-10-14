@@ -88,5 +88,9 @@ After implementing the new features, deploy your application to your local repos
 
 ## 🛠 Skills
 <p>
-    <img src="https://skillicons.dev/icons?i=git,idea,java,jakarta,postgres,maven" height="45" alt="skills"  />
+    <img src="https://skillicons.dev/icons?i=git,idea,java" height="45" alt="Git, IntelliJ IDEA, Java" />
+    <img src="https://raw.githubusercontent.com/jakartaee/jakartaee.github.io/master/images/jakarta_logo.png" height="45" alt="Jakarta EE" />
+    <img src="https://skillicons.dev/icons?i=postgres" height="45" alt="PostgreSQL" />
+    <img src="https://skillicons.dev/icons?i=maven" height="45" alt="Maven" />
 </p>
+
