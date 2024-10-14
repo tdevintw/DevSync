@@ -1,8 +1,8 @@
 package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.services.UserService;
-import dev.yassiraitelghari.services.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.UserService;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

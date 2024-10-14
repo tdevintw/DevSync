@@ -2,9 +2,12 @@ package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.repositories.TaskRepository;
-import dev.yassiraitelghari.repositories.TaskRepositoryImp;
-import dev.yassiraitelghari.services.*;
+import dev.yassiraitelghari.services.implmentations.TagServiceImp;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.TagService;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.interfaces.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

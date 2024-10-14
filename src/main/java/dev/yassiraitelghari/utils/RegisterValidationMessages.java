@@ -3,8 +3,8 @@ package dev.yassiraitelghari.utils;
 import java.util.Optional;
 
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.services.UserService;
-import dev.yassiraitelghari.services.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.UserService;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,7 +95,7 @@ public class RegisterValidationMessages {
     }
 
     public void setEmailValidationMessage(String email) {
-        Optional<User> findUser = userService.get(email);
+        Optional<User> findUser = userService.getByEmail(email );
         if (findUser.isEmpty()) {
             Matcher matcher = pattern.matcher(email);
             if (!matcher.matches()) {
@@ -121,7 +121,7 @@ public class RegisterValidationMessages {
     }
 
     public void setRoleValidationMessage(String role) {
-        if (role.equals("MANAGER") || role.equals("CLIENT")) {
+        if (!role.equals("MANAGER") &&  !role.equals("CLIENT")) {
             roleValidationMessage = "Invalid role specified.";
         }
     }

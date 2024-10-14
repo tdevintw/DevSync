@@ -1,8 +1,8 @@
 package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

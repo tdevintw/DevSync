@@ -1,10 +1,10 @@
 package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
-import dev.yassiraitelghari.services.TagService;
-import dev.yassiraitelghari.services.TagServiceImp;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
+import dev.yassiraitelghari.services.interfaces.TagService;
+import dev.yassiraitelghari.services.implmentations.TagServiceImp;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
 import dev.yassiraitelghari.utils.TagErrors;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
