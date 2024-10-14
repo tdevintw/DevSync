@@ -11,10 +11,17 @@ public class ProfileUpdateValidation {
     public ProfileUpdateValidation(){};
 
     public void setAll(String firstName , String lastName , String password , String confirmPassword){
-        if(firstName.length()<3){
+        if(firstName.isEmpty()){
+            this.firstName = "First Name Cant be empty";
+        }
+        else if(firstName.length()<3){
             this.firstName = "First name is too short";
         }
 
+        if(lastName.isEmpty()){
+            this.lastName = "Last Name Cant be empty";
+        }
+        else
         if(lastName.length()<3){
             this.lastName = "Last name is too short";
         }
