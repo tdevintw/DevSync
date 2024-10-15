@@ -101,25 +101,35 @@ public class TaskRepositoryImp implements TaskRepository {
 
     public boolean delete(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
+        boolean isDeleted = false;
         try {
             entityManager.getTransaction().begin();
-            Task task = entityManager.find(Task.class, id);
-            if (task != null) {
-                entityManager.remove(task);
+            Query query = entityManager.createQuery("DELETE FROM Task task WHERE task.id = :id");
+            query.setParameter("id" , id);
+            int rowsAffected = query.executeUpdate();
+            if(rowsAffected>0){
                 entityManager.getTransaction().commit();
-                return true;
-            } else {
+                isDeleted = true;
+            }else{
                 entityManager.getTransaction().rollback();
-                return false;
             }
 
-        } catch (Exception e) {
+    } catch (PersistenceException | IllegalArgumentException e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
+            isDeleted = false;
+    } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            isDeleted = false;
+        }finally {
+            entityManager.close();
         }
-        return true;
+        return isDeleted;
     }
 
     @Override

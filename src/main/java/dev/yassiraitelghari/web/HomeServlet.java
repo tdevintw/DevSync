@@ -22,8 +22,10 @@ public class HomeServlet extends HttpServlet {
             if(user!=null){
                 if(user.getRole().equals("MANAGER")){
                     response.sendRedirect("dashboard");
+                    return;
                 }else{
                     response.sendRedirect("profile");
+                    return ;
                 }
             }
         }

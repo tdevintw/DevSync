@@ -16,16 +16,17 @@ import java.util.List;
 @WebServlet(name = "RequestsServlet")
 public class RequestsServlet extends HttpServlet {
     private RequestService requestService = new RequestServiceImp();
+
     @Override
-    protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("user")==null || !((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") == null || !((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
-return;
+            return;
         }
 
-           List<Request> requestList = requestService.getAll().stream().filter(request1 -> request1.getStatus().equals("Pending")).toList();
-           request.setAttribute("requests" ,requestList );
-           request.getRequestDispatcher("requests.jsp").forward(request , response);
+        List<Request> requestList = requestService.getAll().stream().filter(request1 -> request1.getStatus().equals("Pending")).toList();
+        request.setAttribute("requests", requestList);
+        request.getRequestDispatcher("admin/requests.jsp").forward(request, response);
     }
 }
 

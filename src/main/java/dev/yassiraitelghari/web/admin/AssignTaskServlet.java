@@ -28,7 +28,10 @@ public class AssignTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user")!=null && !((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")) {
+        if(request.getSession().getAttribute("user")==null || !((User) (request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
             int taskId = Integer.parseInt(request.getParameter("task_id"));
             int oldUserId = Integer.parseInt(request.getParameter("old_user_id"));
             Task task = taskService.findTask(taskId);
@@ -36,7 +39,7 @@ public class AssignTaskServlet extends HttpServlet {
             List<User> filteredUsers = userService.getAll().stream().filter(user -> user.getRole().equals("CLIENT")).filter(user -> !user.getUsername().equals(oldUser.getUsername())).toList();
             request.setAttribute("users", filteredUsers);
 
-            if (task != null && oldUser != null) {
+            if (task != null && oldUser != null && task.getUser().getId()==oldUserId && task.getRequest().getStatus().equals("Pending")) {
                 taskToAssign = task;
                 this.oldUser = oldUser;
             } else {
@@ -44,14 +47,12 @@ public class AssignTaskServlet extends HttpServlet {
                 return;
             }
             request.getRequestDispatcher("admin/assignToUsers.jsp").forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        if(request.getSession().getAttribute("user")==null || ((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
+        if(request.getSession().getAttribute("user")==null ||!((User)(request.getSession().getAttribute("user"))).getRole().equals("MANAGER")){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
@@ -62,6 +63,7 @@ public class AssignTaskServlet extends HttpServlet {
             response.sendRedirect("requests");
             return;
         }
+
         Task task = this.taskToAssign;
         Request request1 = requestService.get(task.getRequest().getId());
         task.setUser(newUser);

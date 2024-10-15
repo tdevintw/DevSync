@@ -40,11 +40,16 @@ public class DeleteTaskServlet extends HttpServlet {
         } else {
             if (task.getUser().getDeleteJeton() > 0) {
                 User user = task.getUser();
+                boolean isTaskDeleted = false;
                 if (tagService.deleteByTask(parsedId)) {
-                    taskService.delete(parsedId);
+                    isTaskDeleted =  taskService.delete(parsedId);
                 }
-                user.setDeleteJeton(0);
-                userService.update(user);
+              if(isTaskDeleted){
+                  user.setTasks(taskService.findTasks(user.getId()));
+                  user.setDeleteJeton(0);
+                  userService.update(user);
+              }
+
             } else {
                 request.getSession().setAttribute("insufficient_token", "insufficient Delete Token , wait until next month");
             }
