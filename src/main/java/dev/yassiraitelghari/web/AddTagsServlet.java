@@ -1,10 +1,10 @@
 package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
-import dev.yassiraitelghari.services.TagService;
-import dev.yassiraitelghari.services.TagServiceImp;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
+import dev.yassiraitelghari.services.interfaces.TagService;
+import dev.yassiraitelghari.services.implmentations.TagServiceImp;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
 import dev.yassiraitelghari.utils.TagErrors;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,11 +22,22 @@ public class AddTagsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
         request.getRequestDispatcher("/dashboard/addTags.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
+
         if (request.getParameter("cancel") != null) {
             User user = (User) request.getSession().getAttribute("user");
             request.getSession().invalidate();

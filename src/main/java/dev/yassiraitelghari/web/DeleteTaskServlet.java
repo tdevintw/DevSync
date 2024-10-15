@@ -2,9 +2,12 @@ package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.repositories.TaskRepository;
-import dev.yassiraitelghari.repositories.TaskRepositoryImp;
-import dev.yassiraitelghari.services.*;
+import dev.yassiraitelghari.services.implmentations.TagServiceImp;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.TagService;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.interfaces.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +22,14 @@ public class DeleteTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
+
         String id = request.getParameter("task_id");
         int parsedId = Integer.parseInt(id);
         Task task = taskService.findTask(parsedId);
@@ -29,11 +40,16 @@ public class DeleteTaskServlet extends HttpServlet {
         } else {
             if (task.getUser().getDeleteJeton() > 0) {
                 User user = task.getUser();
+                boolean isTaskDeleted = false;
                 if (tagService.deleteByTask(parsedId)) {
-                    taskService.delete(parsedId);
+                    isTaskDeleted =  taskService.delete(parsedId);
                 }
-                user.setDeleteJeton(0);
-                userService.update(user);
+              if(isTaskDeleted){
+                  user.setTasks(taskService.findTasks(user.getId()));
+                  user.setDeleteJeton(0);
+                  userService.update(user);
+              }
+
             } else {
                 request.getSession().setAttribute("insufficient_token", "insufficient Delete Token , wait until next month");
             }

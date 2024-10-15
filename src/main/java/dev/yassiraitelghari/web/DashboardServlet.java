@@ -3,7 +3,12 @@ package dev.yassiraitelghari.web;
 import dev.yassiraitelghari.domain.Request;
 import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.services.*;
+import dev.yassiraitelghari.services.implmentations.RequestServiceImp;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.RequestService;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.interfaces.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +28,12 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
+
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -34,7 +45,7 @@ public class DashboardServlet extends HttpServlet {
                 List<Request> requestsWithToken = requestService.RequestWithToken();
                 int tokenSize = requestsWithToken.isEmpty() ? 0  :  requestsWithToken.size() ;
                 request.setAttribute("token_size" ,tokenSize);
-                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
             } else if (user.getRole().equals("CLIENT")) {
                 List<Task> tasks = null;
                 int size = 0;

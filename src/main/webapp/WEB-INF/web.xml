@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.LoginServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.auth.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -44,7 +44,7 @@
 
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.RegisterServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.auth.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -53,7 +53,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.LogoutServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.auth.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -113,7 +113,7 @@
 
     <servlet>
         <servlet-name>RequestsServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.RequestsServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.admin.RequestsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -123,7 +123,7 @@
 
     <servlet>
         <servlet-name>AssignTaskServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.AssignTaskServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.admin.AssignTaskServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -143,11 +143,28 @@
 
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
-        <servlet-class>dev.yassiraitelghari.web.StaticServlet</servlet-class>
+        <servlet-class>dev.yassiraitelghari.web.admin.StaticServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>StaticServlet</servlet-name>
         <url-pattern>/statics</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+
+    <filter>
+        <filter-name>FilterRequestsServlet</filter-name>
+        <filter-class>dev.yassiraitelghari.web.FilterRequestsServlet</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>FilterRequestsServlet</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
 </web-app>

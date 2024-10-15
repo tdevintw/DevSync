@@ -2,10 +2,10 @@ package dev.yassiraitelghari.web;
 
 import dev.yassiraitelghari.domain.Task;
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.services.TaskService;
-import dev.yassiraitelghari.services.TaskServiceImp;
-import dev.yassiraitelghari.services.UserService;
-import dev.yassiraitelghari.services.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.TaskService;
+import dev.yassiraitelghari.services.implmentations.TaskServiceImp;
+import dev.yassiraitelghari.services.interfaces.UserService;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,6 +27,13 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
+
+
       User activeUser = (User) request.getSession().getAttribute("user");
        if(activeUser.getRole().equals("MANAGER")){
            String stringId = request.getParameter("id");
@@ -49,6 +56,13 @@ public class AddTaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if((request.getSession().getAttribute("user"))==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+
+        }
+
         TaskErrors taskError = new TaskErrors();
         LocalDateTime startLocalDateTime = null;
         LocalDateTime endLocalDateTime = null;

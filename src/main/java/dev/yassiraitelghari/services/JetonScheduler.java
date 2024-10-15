@@ -2,6 +2,10 @@ package dev.yassiraitelghari.services;
 
 import dev.yassiraitelghari.domain.Request;
 import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.services.implmentations.RequestServiceImp;
+import dev.yassiraitelghari.services.implmentations.UserServiceImp;
+import dev.yassiraitelghari.services.interfaces.RequestService;
+import dev.yassiraitelghari.services.interfaces.UserService;
 import jakarta.ejb.Schedule;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
