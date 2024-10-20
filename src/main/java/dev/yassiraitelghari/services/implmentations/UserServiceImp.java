@@ -1,10 +1,7 @@
 package dev.yassiraitelghari.services.implmentations;
 
 import dev.yassiraitelghari.domain.User;
-import dev.yassiraitelghari.exceptions.EmailAlreadyExistsException;
-import dev.yassiraitelghari.exceptions.InvalidEmailFormatException;
-import dev.yassiraitelghari.exceptions.InvalidInputWhileRegisteringException;
-import dev.yassiraitelghari.exceptions.UsernameAlreadyExistsException;
+import dev.yassiraitelghari.exceptions.*;
 import dev.yassiraitelghari.repositories.interfaces.UserRepository;
 import dev.yassiraitelghari.repositories.implmentations.UserRepositoryImp;
 import dev.yassiraitelghari.services.interfaces.UserService;
@@ -17,7 +14,15 @@ import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UserServiceImp implements UserService {
-    private UserRepository userRepository = new UserRepositoryImp();
+    private UserRepository userRepository;
+
+    public UserServiceImp(UserRepository userRepository) {
+       this.userRepository = userRepository;
+    }
+
+    public UserServiceImp(){
+        this.userRepository  = new UserRepositoryImp();
+    }
 
     @Override
     public RegisterValidationMessages add(String username, String email, String name, String lastName, String password, String role) {
@@ -60,15 +65,20 @@ public class UserServiceImp implements UserService {
 
     @Override
     public Optional<User> get(String email, String password) {
+
         Optional<User> userFound = userRepository.get(email);
         if (userFound.isPresent()) {
             String hashedPassword = userFound.get().getPassword();
             boolean samePassword = BCrypt.checkpw(password, hashedPassword);
             if (samePassword) {
                 return userFound;
+            } else {
+                throw new InvalidCredentialsException();
             }
+        } else {
+            throw new InvalidCredentialsException();
         }
-        return Optional.empty();
+
     }
 
     @Override

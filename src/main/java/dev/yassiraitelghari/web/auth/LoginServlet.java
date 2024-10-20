@@ -1,6 +1,7 @@
 package dev.yassiraitelghari.web.auth;
 
 import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.exceptions.InvalidCredentialsException;
 import dev.yassiraitelghari.services.interfaces.UserService;
 import dev.yassiraitelghari.services.implmentations.UserServiceImp;
 import jakarta.servlet.ServletException;
@@ -35,13 +36,15 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request , HttpServletResponse response ) throws IOException , ServletException{
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Optional<User> user = userService.get(email , password);
-        if(user.isPresent()){
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user.get());
-            response.sendRedirect("profile");
-        }else{
-            request.setAttribute("error" , "Email or Password is incorrect");
+        try{
+            Optional<User> user = userService.get(email , password);
+            if(user.isPresent()){
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user.get());
+                response.sendRedirect("profile");
+            }
+        }catch (InvalidCredentialsException exception){
+            request.setAttribute("error" , exception.getMessage());
             request.getRequestDispatcher("auth/login.jsp").forward(request , response);
         }
     }

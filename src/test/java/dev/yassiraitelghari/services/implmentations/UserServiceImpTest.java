@@ -1,6 +1,11 @@
 package dev.yassiraitelghari.services.implmentations;
 
+import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.repositories.interfaces.UserRepository;
 import dev.yassiraitelghari.services.interfaces.UserService;
+
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import dev.yassiraitelghari.exceptions.*;
@@ -42,4 +47,14 @@ class UserServiceImpTest {
         InvalidInputWhileRegisteringException exception = assertThrows(InvalidInputWhileRegisteringException.class, () -> userService.add("unique", "unique@gmail.com", "", "", "", ""));
         assertEquals(exception.getMessage(), "First name , last name , role and password Are Required");
     }
+
+    @Test
+    public void userLogin_invalidCredentials_throwsInvalidCredentialsException() {
+        String email = "";
+        String password = "";
+        InvalidCredentialsException exception = assertThrows(InvalidCredentialsException.class, () -> userService.get(email, password));
+        assertEquals(exception.getMessage(), "Email or Password are Incorrect");
+    }
+
+
 }
