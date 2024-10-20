@@ -1,6 +1,10 @@
 package dev.yassiraitelghari.services.implmentations;
 
 import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.exceptions.EmailAlreadyExistsException;
+import dev.yassiraitelghari.exceptions.InvalidEmailFormatException;
+import dev.yassiraitelghari.exceptions.InvalidInputWhileRegisteringException;
+import dev.yassiraitelghari.exceptions.UsernameAlreadyExistsException;
 import dev.yassiraitelghari.repositories.interfaces.UserRepository;
 import dev.yassiraitelghari.repositories.implmentations.UserRepositoryImp;
 import dev.yassiraitelghari.services.interfaces.UserService;
@@ -19,6 +23,20 @@ public class UserServiceImp implements UserService {
     public RegisterValidationMessages add(String username, String email, String name, String lastName, String password, String role) {
         RegisterValidationMessages validationMessages = new RegisterValidationMessages();
         validationMessages.validateAll(username, email, name, lastName, password, role);
+        if (validationMessages.getEmailValidationMessage() != null && validationMessages.getEmailValidationMessage().equals("Email already exist")) {
+            throw new EmailAlreadyExistsException(email);
+        }
+        if (validationMessages.getUsernameValidationMessage() != null && validationMessages.getUsernameValidationMessage().equals("Username already exist")) {
+            throw new UsernameAlreadyExistsException(username);
+        }
+        if (validationMessages.getEmailValidationMessage() != null && validationMessages.getEmailValidationMessage().equals("Email format is incorrect")) {
+            throw new InvalidEmailFormatException(email);
+        }
+        if (validationMessages.getFirstNameValidationMessage() != null && validationMessages.getLastNameValidationMessage() != null && validationMessages.getPasswordValidationMessage() != null && validationMessages.getRoleValidationMessage() != null) {
+            throw new InvalidInputWhileRegisteringException();
+        }
+
+
         if (validationMessages.allNull()) {
             //all null means that there is no errors where validating the user input
             User user = new User();
@@ -34,6 +52,8 @@ public class UserServiceImp implements UserService {
             if (neUser != null) {
                 validationMessages.setRegistredUser(neUser);
             }
+        } else {
+
         }
         return validationMessages;
     }
@@ -52,14 +72,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public ProfileUpdateValidation updateProfile(User user , String  firstName ,String lastName ,String password , String confirmPassword) {
+    public ProfileUpdateValidation updateProfile(User user, String firstName, String lastName, String password, String confirmPassword) {
         ProfileUpdateValidation profileUpdateValidation = new ProfileUpdateValidation();
-        profileUpdateValidation.setAll(firstName , lastName , password , confirmPassword);
-        if(profileUpdateValidation.allNull()){
+        profileUpdateValidation.setAll(firstName, lastName, password, confirmPassword);
+        if (profileUpdateValidation.allNull()) {
             user.setName(firstName);
             user.setLastName(lastName);
-            if(!password.isEmpty()){
-                user.setPassword(BCrypt.hashpw( password , BCrypt.gensalt()));
+            if (!password.isEmpty()) {
+                user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
             }
             profileUpdateValidation.setUpdatedUser(userRepository.update(user));
         }
@@ -67,7 +87,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User update (User user){
+    public User update(User user) {
         return userRepository.update(user);
     }
 

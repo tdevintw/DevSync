@@ -9,6 +9,7 @@
         <class>dev.yassiraitelghari.domain.User</class>
         <class>dev.yassiraitelghari.domain.Tag</class>
         <class>dev.yassiraitelghari.domain.Task</class>
+        <class>dev.yassiraitelghari.domain.Request</class>
 
 
         <properties>

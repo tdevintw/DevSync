@@ -3,13 +3,14 @@ package dev.yassiraitelghari.utils;
 import java.util.Optional;
 
 import dev.yassiraitelghari.domain.User;
+import dev.yassiraitelghari.exceptions.EmailAlreadyExistsException;
 import dev.yassiraitelghari.services.interfaces.UserService;
 import dev.yassiraitelghari.services.implmentations.UserServiceImp;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterValidationMessages {
+public class RegisterValidationMessages  {
 
     private UserService userService = new UserServiceImp();
 

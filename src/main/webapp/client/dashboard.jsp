@@ -954,9 +954,14 @@
                                     if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() == null &&task.getStatus().equals("In Progress")) {
                                         out.println("<form action='request' method='get'><input type='hidden' name='task_id' value=" + task.getId() + "><button  type='submit' style='background-color:gray' class='button-3'>Replace</button></form>");
                                     }
-                                    if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() != null) {
+                                    if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() != null && task.getRequest().getStatus().equals("Pending")) {
                                         out.println("<button  style='background-color:gray' class='button-3'>Request Sent</button>");
                                     }
+
+                                    if (!task.isAddedByMe() && !task.getIsReplaced() && task.getRequest() != null  && task.getRequest().getStatus().equals("Not Responded")) {
+                                        out.println("<button  style='background-color:gray' class='button-3'>Not Responded</button>");
+                                    }
+
                                     out.println("<div></td>");
                                     out.println("</tr>");
                                 }
